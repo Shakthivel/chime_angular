@@ -13,12 +13,16 @@
     </div>
     <div class="video-section">
         <!-- video component -->
-        <div *ngIf="!isScreenPinned" class="grid-video-component">
+        <div *ngIf="!isScreenPinned" class="grid-video-section">
             <div class="grid_video_card" *ngFor="let _ of [].constructor(9)" (click)="changePinStatus()">
             </div>
         </div>
-        <div *ngIf="isScreenPinned" class="pin-video-component ">
-            <div class="pinned-video" (click)="changePinStatus()"></div>
+        <div *ngIf="isScreenPinned" class="pin-video-section ">
+            <div class="pinned-video" >
+                <video #videoElement [height]="450" [style.display]="videoDisplay">
+                    <source *ngIf="!isCamOff && videoBlobUrl" [src]="videoBlobUrl">
+                </video>
+            </div>
             <div class="other-participants" >
                 <div class="other-video" *ngFor="let _ of [].constructor(10)"></div>
             </div>
@@ -42,10 +46,10 @@
             <div *ngIf="micOff" class="icon button disabled-icon" (click)="changeMicStatus()">
                 <img src="assets/icons/mic_off.png"/>
             </div>
-            <div *ngIf="!camOff" class="icon button" (click)="changeCamStatus()">
+            <div *ngIf="!isCamOff" class="icon button" (click)="stopVideoRecording()">
                 <img src="assets/icons/camera.png"/>
             </div>
-            <div *ngIf="camOff" class="icon button disabled-icon" (click)="changeCamStatus()">
+            <div *ngIf="isCamOff" class="icon button disabled-icon" (click)="startVideoRecording()">
                 <img src="assets/icons/camera_off.png"/>
             </div>
             <div *ngIf="shareOff" class="icon button" (click)="changeScreenShareStatus()">
@@ -54,7 +58,7 @@
             <div *ngIf="!shareOff" class="icon button disabled-icon" (click)="changeScreenShareStatus()">
                 <img src="assets/icons/share_screen_on.png"/>
             </div>
-            <div class="icon button">
+            <div class="icon button" (click)="changePinStatus()">
                 <img src="assets/icons/grid.png"/>
             </div>
             <div class="icon round-icon button">
