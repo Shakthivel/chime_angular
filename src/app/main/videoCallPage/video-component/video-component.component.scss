@@ -37,15 +37,60 @@
         }
     }
     .video-section{
-        flex-basis:75%;
-        padding:20px;
-        .video-component{
-            background-color: black;
+        height:75%;
+        overflow:hidden;
+        .pin-video-component{
+            width: 100%;
+            height:100%;
+            display: flex;
+            position: relative;
+            
+            .pinned-video{
+                height:95%;
+                width: 85%;
+                position:sticky;
+                background-color: black;
+                border-radius: 10px;
+                
+            }
+            .other-participants{
+                width: 15%;
+                position: relative;
+                .other-video{
+                    aspect-ratio: 1;
+                    background-color: black;
+                    margin:5px 0px;
+                    border-radius: 10px;
+                }
+            }
+            .other-participants:hover{
+                overflow:scroll;
+            }
+            .pinned-video,.other-participants{
+                margin: 10px;
+            }
+        }
+
+        .grid-video-component{
             height:100%;
             width: 100%;
-            border-radius: 10px;
+            display: grid;
+            grid-auto-flow: row;
+            grid-auto-rows: 50%;
+            grid-template-columns:repeat(3,1fr); 
+            grid-gap: 10px;
+            .grid_video_card{
+                background-color: black;
+                border-radius: 10px;
+            }
+        
         }
+        .grid-video-component:hover{
+            overflow-y: scroll;
+        }
+        
     }
+
     #meetingFooter{
         background-color: white;
         flex-basis:15%;
@@ -61,8 +106,8 @@
                 height:20px;
                 object-fit:cover;
             }
+        
         }
-
         .button{
             padding:5px;
             border:2px solid $color-grey-input-border;
@@ -74,6 +119,9 @@
         }
         .icon:hover,.round-icon:hover{
             cursor:pointer;
+        }
+        .disabled-icon{
+            background-color: red;
         }
     }
 

@@ -13,22 +13,46 @@
     </div>
     <div class="video-section">
         <!-- video component -->
-        <div class="video-component"></div>
+        <div *ngIf="!isScreenPinned" class="grid-video-component">
+            <div class="grid_video_card" *ngFor="let _ of [].constructor(9)" (click)="changePinStatus()">
+            </div>
+        </div>
+        <div *ngIf="isScreenPinned" class="pin-video-component ">
+            <div class="pinned-video" (click)="changePinStatus()"></div>
+            <div class="other-participants" >
+                <div class="other-video" *ngFor="let _ of [].constructor(10)"></div>
+            </div>
+        </div>
     </div>
     <div id="meetingFooter" class="row-container">
 
-        <div class="left-speaker">
-            <div class="icon button">
-                <img src="assets/icons/speaker.png"/>
+        <div class="left-speaker" (click)="changeSpeakerStatus()">
+            <div *ngIf="!speakerOff" class="icon button" >
+                <img  src="assets/icons/speaker.png"/>
+            </div>
+            <div *ngIf="speakerOff" class="icon button disabled-icon">
+                <img  src="assets/icons/speaker_off.png"/>
             </div>
         </div>
 
         <div class="middle-options row-container">
-            <div class="icon button">
+            <div *ngIf="!micOff" class="icon button" (click)="changeMicStatus()">
                 <img src="assets/icons/microphone.png"/>
             </div>
-            <div class="icon button">
+            <div *ngIf="micOff" class="icon button disabled-icon" (click)="changeMicStatus()">
+                <img src="assets/icons/mic_off.png"/>
+            </div>
+            <div *ngIf="!camOff" class="icon button" (click)="changeCamStatus()">
                 <img src="assets/icons/camera.png"/>
+            </div>
+            <div *ngIf="camOff" class="icon button disabled-icon" (click)="changeCamStatus()">
+                <img src="assets/icons/camera_off.png"/>
+            </div>
+            <div *ngIf="shareOff" class="icon button" (click)="changeScreenShareStatus()">
+                <img src="assets/icons/share_screen_off.png"/>
+            </div>
+            <div *ngIf="!shareOff" class="icon button disabled-icon" (click)="changeScreenShareStatus()">
+                <img src="assets/icons/share_screen_on.png"/>
             </div>
             <div class="icon button">
                 <img src="assets/icons/grid.png"/>
