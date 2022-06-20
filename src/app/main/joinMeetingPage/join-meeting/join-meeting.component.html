@@ -8,23 +8,23 @@
                 <span>Meeting ID</span>
             </div>
             <div class="input-box">
-                <input class="input-field" type="text" placeholder="Enter Meeting ID">
+                <input class="input-field" type="text" placeholder="Enter Meeting ID" #meetingId>
             </div>
             <div class="input-label">
                 <span>Email</span>
             </div>
             <div class="input-box">
-                <input class="input-field" type="text" placeholder="Enter Email">
+                <input class="input-field" type="email" placeholder="Enter Email" #email>
             </div>            <div class="input-label">
                 <span>Name</span>
             </div>
             <div class="input-box">
-                <input class="input-field" type="text" placeholder="Enter Name">
+                <input class="input-field" type="text" placeholder="Enter Name" #name>
             </div>
             <div class="terms-notice">
                 <span>By clicking "Join" you agree to our Terms of Services and Privacy Statement</span>
             </div>
-            <div class="join-button" (click)="redirectToTest()">
+            <div class="join-button" (click)="joinMeeting(meetingId.value, email.value, name.value)">
                 <button class="blue-button">  Join</button>
             </div>
         </div>

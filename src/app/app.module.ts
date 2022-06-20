@@ -29,7 +29,8 @@ import { CreateMeetingComponent } from './main/createMeetingPage/create-meeting/
     AppRoutingModule,
     WebcamModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

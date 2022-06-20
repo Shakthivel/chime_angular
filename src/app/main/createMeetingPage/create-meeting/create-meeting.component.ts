@@ -21,7 +21,7 @@ export class CreateMeetingComponent implements OnInit {
     //this.meetingId = uuid(); //format in a pattern
     return this.meetingId;
   }
-  
+
   verify(str:String)
   {
     console.log(str);
@@ -29,6 +29,10 @@ export class CreateMeetingComponent implements OnInit {
 
   redirectToTest(){
     this.router.navigate(['/test']);
+  }
+
+  joinMeet(): void {
+
   }
 
 }
