@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CreateMeetingComponent } from './main/createMeetingPage/create-meeting/create-meeting.component';
 import { ParticipantsComponentComponent } from './main/videoCallPage/participants-component/participants-component.component';
 import { VideoCallComponent } from './main/videoCallPage/video-call/video-call.component';
 import { VideoComponentComponent } from './main/videoCallPage/video-component/video-component.component';
@@ -16,11 +17,12 @@ import { TestpageComponent } from './main/testpage/testpage.component';
 @NgModule({
   declarations: [
     AppComponent,
+    JoinMeetingComponent,
+    CreateMeetingComponent,
     VideoCallComponent,
     ParticipantsComponentComponent,
     VideoComponentComponent,
     TestpageComponent,
-    JoinMeetingComponent
   ],
   imports: [
     BrowserModule,
