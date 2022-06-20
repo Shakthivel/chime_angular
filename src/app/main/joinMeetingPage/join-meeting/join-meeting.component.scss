@@ -27,7 +27,7 @@
     }
 }
 
-.input-field,.grey-button{
+.input-field,.grey-button,.blue-button{
     border-radius: 10px;
     border: 1px solid ;
     border-color: $color-grey-input-border;
@@ -38,4 +38,10 @@
 padding: 10px;
 background-color:$color-grey-button-disabled;
 color:$color-grey-button-disabled-text;
+}
+
+.blue-button{
+    padding: 10px;
+    background-color:$color-blue-primary;
+    color:white;
 }
