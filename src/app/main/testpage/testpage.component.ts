@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
 
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { AudioRecordingService } from 'src/app/core/services/audio-recording.service';
 import { VideoRecordingService } from 'src/app/core/services/video-recording.service';
 
@@ -35,7 +36,8 @@ export class TestpageComponent implements OnInit {
     private ref: ChangeDetectorRef,
     private audioRecordingService: AudioRecordingService,
     private videoRecordingService: VideoRecordingService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private router: Router
   ) {
 
     this.videoRecordingService.recordingFailed().subscribe(() => {
@@ -79,7 +81,7 @@ export class TestpageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.video = this.videoElement.nativeElement;
+
   }
 
   startVideoRecording() {
@@ -90,7 +92,6 @@ export class TestpageComponent implements OnInit {
       this.isVideoRecording = true;
       this.videoRecordingService.startRecording(this.videoConf)
       .then(stream => {
-        // this.video.src = window.URL.createObjectURL(stream);
         this.video.srcObject = stream;
         this.video.play();
       })
@@ -173,5 +174,9 @@ export class TestpageComponent implements OnInit {
     document.body.appendChild(anchor);
     anchor.click();
     document.body.removeChild(anchor);
+  }
+  
+  redirectToMeet(){
+    this.router.navigate(["/meet"]);
   }
 }

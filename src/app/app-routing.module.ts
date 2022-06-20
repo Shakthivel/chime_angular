@@ -1,7 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CreateMeetingComponent } from './main/createMeetingPage/create-meeting/create-meeting.component';
+import { JoinMeetingComponent } from './main/joinMeetingPage/join-meeting/join-meeting.component';
+import { TestpageComponent } from './main/testpage/testpage.component';
+import { VideoCallComponent } from './main/videoCallPage/video-call/video-call.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', component: JoinMeetingComponent },
+  { path: 'join', component: JoinMeetingComponent },
+  { path: 'create', component: CreateMeetingComponent },
+  { path: 'test', component: TestpageComponent },
+  { path: 'meet', component: VideoCallComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

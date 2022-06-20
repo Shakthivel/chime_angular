@@ -101,9 +101,10 @@
         flex-basis:15%;
         justify-content: space-between;
         align-items: center;
-        .icon,.round-icon{
-            height:30px;
-            width:30px;
+
+        .icon-img,.round-icon{
+            height:40px;
+            width:40px;
             display:flex;
             align-items:center;
             justify-content:center;
@@ -114,8 +115,7 @@
         
         }
         .button{
-            padding:5px;
-            border:2px solid $color-grey-input-border;
+            border:1px solid $color-grey-input-border;
             border-radius: 10px;
             margin: 5px 10px;
         }

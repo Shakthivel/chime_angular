@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-meeting',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class CreateMeetingComponent implements OnInit {
 
   mail:String = "";
-  constructor() {
+  constructor(private router: Router) {
    }
 
   meetingId:String ="xxx-yyy-zzz";
@@ -24,6 +25,10 @@ export class CreateMeetingComponent implements OnInit {
   verify(str:String)
   {
     console.log(str);
+  }
+
+  redirectToTest(){
+    this.router.navigate(['/test']);
   }
 
 }
