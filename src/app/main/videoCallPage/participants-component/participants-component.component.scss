@@ -1,0 +1,95 @@
+@import "../../../../variables.scss";
+
+.participants-section{
+    background-color: #e8e8e8;
+    padding:10px;
+    height:100%;
+    .header-section{
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        color:$color-grey-text;
+        .active{
+            background-color: $color-blue-background-primary;
+            color: $color-blue-text-primary;
+        }
+        .participants-header,.messages-header{
+            border-radius: 10px;
+            margin:5px;
+            padding: 10px;  
+            flex-basis: 50%;
+            div{
+                text-align: center;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+
+    .header-section:hover{
+        overflow-x: scroll;
+    }
+
+}
+
+
+
+.list-section{
+    height:80%;
+    overflow:hidden;
+    margin:10px 5px;
+    padding:5px;
+    background-color: white;
+    border-radius: 10px;
+    .participant-card{
+        margin:10px 0px;
+        display:flex;
+        justify-content: space-between; 
+        align-items: center;
+        .participant-image{
+            height:40px;
+            width:40px;
+            background-color: $color-blue-text-primary;
+
+            img{
+                height:33px;
+            }
+        }
+        .participant-name{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .participant-av-icon{
+            height:20px;
+            width:20px;
+            margin:0px 3px;
+            img{
+                height:16px;
+            }
+        }
+
+        .participant-av-icon,.participant-image{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100px;
+            img{
+                aspect-ratio: 1;
+                border-radius: 100px;
+                object-fit: cover;
+            }
+        }
+
+        .participant-av-icon,.participant-image,.participant-name{
+            margin:3px;
+        }
+    }
+}
+
+.icon-img{
+    cursor:pointer;
+}
+
+.list-section:hover{
+    overflow-y:scroll;
+}
