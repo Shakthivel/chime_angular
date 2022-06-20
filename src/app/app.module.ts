@@ -5,8 +5,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TestpageComponent } from './components/testpage/testpage.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TestpageComponent } from './main/testpage/testpage.component';
 
 @NgModule({
   declarations: [

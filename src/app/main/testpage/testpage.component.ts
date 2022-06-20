@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { AudioRecordingService } from 'src/app/services/audio-recording.service';
-import { VideoRecordingService } from 'src/app/services/video-recording.service';
+
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { AudioRecordingService } from 'src/app/core/services/audio-recording.service';
+import { VideoRecordingService } from 'src/app/core/services/video-recording.service';
 
 @Component({
   selector: 'app-testpage',
