@@ -2,16 +2,14 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AudioRecordingService } from 'src/app/core/services/audio-recording.service';
 import { VideoRecordingService } from 'src/app/core/services/video-recording.service';
-import {MeetingSessionService} from "../../../core/services/meeting-session/meeting-session.service";
+import { MeetingSessionService } from '../../../core/services/meeting-session/meeting-session.service';
 
 @Component({
   selector: 'app-video-component',
   templateUrl: './video-component.component.html',
-  styleUrls: ['./video-component.component.scss']
+  styleUrls: ['./video-component.component.scss'],
 })
 export class VideoComponentComponent implements OnInit {
-
-
   @ViewChild('videoElement') videoElement: any;
   @ViewChild('audioElement') audioElement: any;
   isCamOff:boolean = true;
@@ -29,7 +27,6 @@ export class VideoComponentComponent implements OnInit {
   shareOff:boolean = true;
   
   isScreenPinned:boolean = true;
-
 
   constructor(
     // private ref: ChangeDetectorRef,
@@ -66,7 +63,7 @@ export class VideoComponentComponent implements OnInit {
     // videoTileDidUpdate is called whenever a new tile is created or tileState changes.
     videoTileDidUpdate: (tileState: any) => {
       // Ignore a tile without attendee ID and other attendee's tile.
-      console.log('videoTileDidUpdate')
+      console.log('videoTileDidUpdate');
       console.log(tileState);
       if (!tileState.boundAttendeeId || !tileState.localTile) {
         return;
@@ -75,10 +72,10 @@ export class VideoComponentComponent implements OnInit {
       //videoElement-1, videoElement-2
     },
     audioVideoDidStart: (tileState: any) => {
-      console.log('audioVideoDidStart()')
-      console.log(tileState)
+      console.log('audioVideoDidStart()');
+      console.log(tileState);
       this.meetingSessionService.meetingSession.audioVideo.startLocalVideoTile();
-    }
+    },
   };
 
   ngOnInit(): void {
@@ -86,7 +83,21 @@ export class VideoComponentComponent implements OnInit {
     this.meetingSessionService.startAudioOutput().then(()=> {
       console.log('audion output started');
       // this.meetingSessionService.meetingSession.audioVideo.bindAudioElement(this.audioElement);
-    })
+    });
+  }
+
+  async toggleCamera() {
+    console.log('camera toggled', this.isCamOff);
+    if (this.isCamOff) {
+      await this.meetingSessionService.meetingSession.audioVideo.startVideoInput(
+        this.meetingSessionService.selectedVideoInput
+      );
+      this.meetingSessionService.meetingSession.audioVideo.startLocalVideoTile();
+    }
+    //pass the tile html elem as param here
+    else
+      await this.meetingSessionService.meetingSession.audioVideo.stopVideoInput();
+    this.isCamOff = !this.isCamOff;
   }
 
   changeSpeakerStatus(){
@@ -112,5 +123,4 @@ export class VideoComponentComponent implements OnInit {
   //     this.video.srcObject = this.videoBlobUrl;
   //     this.videoDisplay = 'none';
   // }
-
 }
