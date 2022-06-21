@@ -8,11 +8,11 @@
         </div>
     </div>
     <div class="test-button-section">
-        <button class="test-button-media" *ngIf="!isAudioRecording" (click)="startAudioRecording()">
+        <button class="test-button-media" *ngIf="!isAudioRecording" >
             <i class='fas fa-microphone-slash media-icon-disable'></i>
             Unmute
         </button>
-        <button class="test-button-media" *ngIf="isAudioRecording" (click)="stopAudioRecording()">
+        <button class="test-button-media" *ngIf="isAudioRecording" >
             <i class='fas fa-microphone media-icon-enable'></i>
             Mute
         </button>
@@ -38,7 +38,7 @@
           <div id="audioTimer" *ngIf="isAudioRecording && !audioBlobUrl"> {{ audioRecordedTime }} </div>
           <audio *ngIf="!isAudioRecording && audioBlobUrl"  controls>
             <source [src]="audioBlobUrl" type="audio/mp3">
-          </audio>       
+          </audio>
         </div>
       </div>
       <div>

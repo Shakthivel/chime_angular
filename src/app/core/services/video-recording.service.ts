@@ -29,7 +29,7 @@ export class VideoRecordingService {
   getRecordedUrl(): Observable<string> {
     return this._recordedUrl.asObservable();
   }
-  
+
   getRecordedBlob(): Observable<RecordedVideoOutput> {
     return this._recorded.asObservable();
   }
@@ -114,11 +114,14 @@ export class VideoRecordingService {
 
   private processVideo(audioVideoWebMURL: any) {
     // console.log(audioVideoWebMURL);
-    const recordedBlob = this.recorder.getBlob();
-    this.recorder.getDataURL(function (dataURL: any) { });
-    const recordedName = encodeURIComponent('video_' + new Date().getTime() + '.webm');
-    this._recorded.next({ blob: recordedBlob, url: audioVideoWebMURL, title: recordedName });
-    this.stopMedia();
+    if(this.recorder) {
+      const recordedBlob = this.recorder?.getBlob();
+      this.recorder.getDataURL(function (dataURL: any) {
+      });
+      const recordedName = encodeURIComponent('video_' + new Date().getTime() + '.webm');
+      this._recorded.next({blob: recordedBlob, url: audioVideoWebMURL, title: recordedName});
+      this.stopMedia();
+    }
     //this.recorder.save(recordedName);
   }
 

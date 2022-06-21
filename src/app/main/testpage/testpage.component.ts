@@ -4,6 +4,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AudioRecordingService } from 'src/app/core/services/audio-recording.service';
 import { VideoRecordingService } from 'src/app/core/services/video-recording.service';
+import {MeetingSessionService} from "../../core/services/meeting-session/meeting-session.service";
 
 @Component({
   selector: 'app-testpage',
@@ -37,7 +38,8 @@ export class TestpageComponent implements OnInit {
     private audioRecordingService: AudioRecordingService,
     private videoRecordingService: VideoRecordingService,
     private sanitizer: DomSanitizer,
-    private router: Router
+    private router: Router,
+    private meetingSessionService: MeetingSessionService
   ) {
 
     this.videoRecordingService.recordingFailed().subscribe(() => {
@@ -81,7 +83,18 @@ export class TestpageComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.meetingSessionService.getAudioInputDevices().then(data=> {
+      this.meetingSessionService.audioInputDevices = data;
+      this.meetingSessionService.setAudioInput(0);
+    });
+    this.meetingSessionService.getAudioOutputDevices().then(data=> {
+      this.meetingSessionService.audioOutputDevices = data;
+      this.meetingSessionService.setAudioOutput(0);
+    });
+    this.meetingSessionService.getVideoInputDevices().then(data=> {
+      this.meetingSessionService.videoInputDevices = data;
+      this.meetingSessionService.setVideoInput(0);
+    });
   }
 
   startVideoRecording() {
@@ -175,7 +188,7 @@ export class TestpageComponent implements OnInit {
     anchor.click();
     document.body.removeChild(anchor);
   }
-  
+
   redirectToMeet(){
     this.router.navigate(["/meet"]);
   }

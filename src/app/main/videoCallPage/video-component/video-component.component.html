@@ -1,76 +1,80 @@
-<div class="column-container full-height">
-    <div id="meetingHeading" class="row-container">
-            <div class="back-button-section">
-                <img src="assets/icons/back-arrow.png" alt="">
-            </div>
-            <div class="title-section">
-                <span>Meeting Title</span>
-            </div>
-            <div class="invite-section row-container">
-                <img src="assets/icons/add.png" alt="">
-                <span>Invite people</span>
-            </div>
-    </div>
-    <div class="video-section">
-        <!-- video component -->
-        <div *ngIf="!isScreenPinned" class="grid-video-section">
-            <div class="grid_video_card" *ngFor="let _ of [].constructor(9)" (click)="changePinStatus()">
-            </div>
-        </div>
-        <div *ngIf="isScreenPinned" class="pin-video-section ">
-            <div class="pinned-video" >
-                <video #videoElement [height]="450" [style.display]="videoDisplay">
-                    <source *ngIf="!isCamOff && videoBlobUrl" [src]="videoBlobUrl">
-                </video>
-            </div>
-            <div class="other-participants" >
-                <div class="other-video" *ngFor="let _ of [].constructor(10)"></div>
-            </div>
-        </div>
-    </div>
-    <div id="meetingFooter" class="row-container">
+<!--<div class="column-container full-height">-->
+<!--    <div id="meetingHeading" class="row-container">-->
+<!--            <div class="back-button-section">-->
+<!--                <img src="assets/icons/back-arrow.png" alt="">-->
+<!--            </div>-->
+<!--            <div class="title-section">-->
+<!--                <span>Meeting Title</span>-->
+<!--            </div>-->
+<!--            <div class="invite-section row-container">-->
+<!--                <img src="assets/icons/add.png" alt="">-->
+<!--                <span>Invite people</span>-->
+<!--            </div>-->
+<!--    </div>-->
+<!--    <div class="video-section">-->
+<!--        &lt;!&ndash; video component &ndash;&gt;-->
+<!--        <div *ngIf="!isScreenPinned" class="grid-video-section">-->
+<!--            <div class="grid_video_card" *ngFor="let _ of [].constructor(9)" (click)="changePinStatus()">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div *ngIf="isScreenPinned" class="pin-video-section ">-->
+<!--            <div class="pinned-video" >-->
+<!--                <video #videoElement [height]="450" [style.display]="videoDisplay">-->
+<!--                    <source *ngIf="!isCamOff && videoBlobUrl" [src]="videoBlobUrl">-->
+<!--                </video>-->
+<!--            </div>-->
+<!--            <div class="other-participants" >-->
+<!--                <div class="other-video" *ngFor="let _ of [].constructor(10)"></div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div id="meetingFooter" class="row-container">-->
 
-        <div class="left-speaker" (click)="changeSpeakerStatus()">
-            <div *ngIf="!speakerOff" class="icon-img button" >
-                <img  src="assets/icons/speaker.png"/>
-            </div>
-            <div *ngIf="speakerOff" class="icon-img button disabled-icon">
-                <img  src="assets/icons/speaker_off.png"/>
-            </div>
-        </div>
+<!--        <div class="left-speaker" (click)="changeSpeakerStatus()">-->
+<!--            <div *ngIf="!speakerOff" class="icon-img button" >-->
+<!--                <img  src="assets/icons/speaker.png"/>-->
+<!--            </div>-->
+<!--            <div *ngIf="speakerOff" class="icon-img button disabled-icon">-->
+<!--                <img  src="assets/icons/speaker_off.png"/>-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <div class="middle-options row-container">
-            <div *ngIf="!micOff" class="icon-img button" (click)="changeMicStatus()">
-                <img src="assets/icons/microphone.png"/>
-            </div>
-            <div *ngIf="micOff" class="icon-img button disabled-icon" (click)="changeMicStatus()">
-                <img src="assets/icons/mic_off.png"/>
-            </div>
-            <div *ngIf="!isCamOff" class="icon-img button" (click)="stopVideoRecording()">
-                <img src="assets/icons/camera.png"/>
-            </div>
-            <div *ngIf="isCamOff" class="icon-img button disabled-icon" (click)="startVideoRecording()">
-                <img src="assets/icons/camera_off.png"/>
-            </div>
-            <div *ngIf="shareOff" class="icon-img button" (click)="changeScreenShareStatus()">
-                <img src="assets/icons/share_screen_off.png"/>
-            </div>
-            <div *ngIf="!shareOff" class="icon-img button disabled-icon" (click)="changeScreenShareStatus()">
-                <img src="assets/icons/share_screen_on.png"/>
-            </div>
-            <div class="icon-img button" (click)="changePinStatus()">
-                <img src="assets/icons/grid.png"/>
-            </div>
-            <div class="icon-img round-icon button">
-                <img src="assets/icons/options.png"/>
-            </div>
-        </div>
+<!--        <div class="middle-options row-container">-->
+<!--            <div *ngIf="!micOff" class="icon-img button" (click)="changeMicStatus()">-->
+<!--                <img src="assets/icons/microphone.png"/>-->
+<!--            </div>-->
+<!--            <div *ngIf="micOff" class="icon-img button disabled-icon" (click)="changeMicStatus()">-->
+<!--                <img src="assets/icons/mic_off.png"/>-->
+<!--            </div>-->
+<!--            <div *ngIf="!isCamOff" class="icon-img button" (click)="stopVideoRecording()">-->
+<!--                <img src="assets/icons/camera.png"/>-->
+<!--            </div>-->
+<!--            <div *ngIf="isCamOff" class="icon-img button disabled-icon" (click)="startVideoRecording()">-->
+<!--                <img src="assets/icons/camera_off.png"/>-->
+<!--            </div>-->
+<!--            <div *ngIf="shareOff" class="icon-img button" (click)="changeScreenShareStatus()">-->
+<!--                <img src="assets/icons/share_screen_off.png"/>-->
+<!--            </div>-->
+<!--            <div *ngIf="!shareOff" class="icon-img button disabled-icon" (click)="changeScreenShareStatus()">-->
+<!--                <img src="assets/icons/share_screen_on.png"/>-->
+<!--            </div>-->
+<!--            <div class="icon-img button" (click)="changePinStatus()">-->
+<!--                <img src="assets/icons/grid.png"/>-->
+<!--            </div>-->
+<!--            <div class="icon-img round-icon button">-->
+<!--                <img src="assets/icons/options.png"/>-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <div class="right-leave">
-            <div class="icon-img button">
-                <img src="assets/icons/leave.png"/>
-            </div>
-        </div>
+<!--        <div class="right-leave">-->
+<!--            <div class="icon-img button">-->
+<!--                <img src="assets/icons/leave.png"/>-->
+<!--            </div>-->
+<!--        </div>-->
 
-    </div>
-</div>
+<!--    </div>-->
+<!--</div>-->
+
+<video #videoElement [height]="450">
+</video>
+<audio #audioElement></audio>
