@@ -95,7 +95,7 @@ export class VideoComponentComponent implements OnInit {
         this.meetingSessionService.meetingSession.audioVideo.start();
       });
     this.meetingSessionService.startAudioOutput().then(() => {
-      console.log('audion output started');
+      console.log('audio output started');
       // this.meetingSessionService.meetingSession.audioVideo.bindAudioElement(this.audioElement);
     });
   }
