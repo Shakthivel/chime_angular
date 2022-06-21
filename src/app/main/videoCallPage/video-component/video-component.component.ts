@@ -14,7 +14,7 @@ export class VideoComponentComponent implements OnInit {
 
   @ViewChild('videoElement') videoElement: any;
   @ViewChild('audioElement') audioElement: any;
-  // isCamOff:boolean = true;
+  isCamOff:boolean = true;
   // video!: any;
   // videoDisplay = 'none';
   // videoRecordedTime!: any;
@@ -24,11 +24,11 @@ export class VideoComponentComponent implements OnInit {
   // videoStream!: MediaStream;
   // videoConf = { video: { facingMode:"user", width: 540 }, audio: true}
   //
-  // speakerOff:boolean = false;
-  // micOff:boolean = true;
-  // shareOff:boolean = true;
-  //
-  // isScreenPinned:boolean = true;
+  speakerOff:boolean = false;
+  micOff:boolean = true;
+  shareOff:boolean = true;
+  
+  isScreenPinned:boolean = true;
 
 
   constructor(
@@ -72,6 +72,7 @@ export class VideoComponentComponent implements OnInit {
         return;
       }
       this.meetingSessionService.meetingSession.audioVideo.bindVideoElement(tileState.tileId,this.videoElement.nativeElement);
+      //videoElement-1, videoElement-2
     },
     audioVideoDidStart: (tileState: any) => {
       console.log('audioVideoDidStart()')
@@ -82,40 +83,27 @@ export class VideoComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.meetingSessionService.startAudioInput().then(()=>console.log('audio input started'));
-    this.meetingSessionService.startVideoInput().then(()=>console.log('video input started')).then(()=>{
-      this.meetingSessionService.meetingSession.audioVideo.addObserver(this.observer);
-      this.meetingSessionService.meetingSession.audioVideo.start();
-    });
     this.meetingSessionService.startAudioOutput().then(()=> {
       console.log('audion output started');
       // this.meetingSessionService.meetingSession.audioVideo.bindAudioElement(this.audioElement);
     })
   }
 
-  // changeSpeakerStatus(){this.speakerOff = ! this.speakerOff;}
-  // changeMicStatus(){this.micOff = ! this.micOff;}
-  // changeScreenShareStatus(){this.shareOff = !this.shareOff;}
-  // changePinStatus(){
-  //   this.isScreenPinned = !this.isScreenPinned;
-  // }
+  changeSpeakerStatus(){
+    this.speakerOff = ! this.speakerOff;
+  }
+  changeMicStatus(){this.micOff = ! this.micOff;}
+  changeScreenShareStatus(){this.shareOff = !this.shareOff;}
+  changePinStatus(){
+    this.isScreenPinned = !this.isScreenPinned;
+  }
   //
-  // startVideoRecording() {
-  //   console.log("TEST")
-  //   this.isCamOff = false;
-  //   console.log(this.isCamOff)
-  //   this.video = this.videoElement.nativeElement;
-  //   this.video.controls = false;
-  //   this.videoDisplay = 'block';
-  //   this.videoRecordingService.startRecording(this.videoConf)
-  //   .then(stream => {
-  //       this.video.srcObject = stream;
-  //       this.video.play();
-  //   })
-  //   .catch(function (err) {
-  //       console.log(err.name + ": " + err.message);
-  //   });
-  //
-  // }
+  startVideoRecording() {
+    this.meetingSessionService.startVideoInput().then(()=>console.log('video input started')).then(()=>{
+      this.meetingSessionService.meetingSession.audioVideo.addObserver(this.observer);
+      this.meetingSessionService.meetingSession.audioVideo.start();
+    });
+  }
   //
   // stopVideoRecording() {
   //     this.isCamOff = true;

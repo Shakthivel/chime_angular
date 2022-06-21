@@ -1,8 +1,7 @@
 <div class="test-page">
     <div class="test-profile-box">
-        <video #videoElement [height]="450" [style.display]="videoDisplay">
-            <source *ngIf="!isVideoRecording && videoBlobUrl" [src]="videoBlobUrl">
-        </video>
+      <video #videoElement [height]="450">
+      </video>
         <div class="test-profile-logo" *ngIf="!isVideoRecording">
             <i class="far fa-user profile-icon"></i>
         </div>
@@ -20,7 +19,7 @@
             <i class='fas fa-video-slash media-icon-disable'></i>
             Start Video
         </button>
-        <button class="test-button-media" *ngIf="isVideoRecording" (click)="stopVideoRecording()">
+        <button class="test-button-media" *ngIf="isVideoRecording" >
             <i class='fas fa-video media-icon-enable'></i>
             Stop Video
         </button>
