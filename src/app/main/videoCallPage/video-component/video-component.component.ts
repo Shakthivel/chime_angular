@@ -25,8 +25,10 @@ export class VideoComponentComponent implements OnInit {
   speakerOff:boolean = false;
   micOff:boolean = true;
   shareOff:boolean = true;
-  
+
   isScreenPinned:boolean = true;
+
+
 
   constructor(
     // private ref: ChangeDetectorRef,
@@ -59,24 +61,25 @@ export class VideoComponentComponent implements OnInit {
     // });
   }
 
-  observer = {
-    // videoTileDidUpdate is called whenever a new tile is created or tileState changes.
-    videoTileDidUpdate: (tileState: any) => {
-      // Ignore a tile without attendee ID and other attendee's tile.
-      console.log('videoTileDidUpdate');
-      console.log(tileState);
-      if (!tileState.boundAttendeeId || !tileState.localTile) {
-        return;
-      }
-      this.meetingSessionService.meetingSession.audioVideo.bindVideoElement(tileState.tileId,this.videoElement.nativeElement);
-      //videoElement-1, videoElement-2
-    },
-    audioVideoDidStart: (tileState: any) => {
-      console.log('audioVideoDidStart()');
-      console.log(tileState);
-      this.meetingSessionService.meetingSession.audioVideo.startLocalVideoTile();
-    },
-  };
+  //TODO: uncomment below
+  // observer = {
+  //   // videoTileDidUpdate is called whenever a new tile is created or tileState changes.
+  //   videoTileDidUpdate: (tileState: any) => {
+  //     // Ignore a tile without attendee ID and other attendee's tile.
+  //     console.log('videoTileDidUpdate');
+  //     console.log(tileState);
+  //     if (!tileState.boundAttendeeId || !tileState.localTile) {
+  //       return;
+  //     }
+  //     this.meetingSessionService.meetingSession.audioVideo.bindVideoElement(tileState.tileId,this.videoElement.nativeElement);
+  //     //videoElement-1, videoElement-2
+  //   },
+  //   audioVideoDidStart: (tileState: any) => {
+  //     console.log('audioVideoDidStart()');
+  //     console.log(tileState);
+  //     this.meetingSessionService.meetingSession.audioVideo.startLocalVideoTile();
+  //   },
+  // };
 
   ngOnInit(): void {
     this.meetingSessionService.startAudioInput().then(()=>console.log('audio input started'));
@@ -110,11 +113,12 @@ export class VideoComponentComponent implements OnInit {
   }
   //
   startVideoRecording() {
+    //TODO: uncomment below
     this.isCamOff=false;
-    this.meetingSessionService.startVideoInput().then(()=>console.log('video input started')).then(()=>{
-      this.meetingSessionService.meetingSession.audioVideo.addObserver(this.observer);
-      this.meetingSessionService.meetingSession.audioVideo.start();
-    });
+    // this.meetingSessionService.startVideoInput().then(()=>console.log('video input started')).then(()=>{
+    //   this.meetingSessionService.meetingSession.audioVideo.addObserver(this.observer);
+    //   this.meetingSessionService.meetingSession.audioVideo.start();
+    // });
   }
   //
   stopVideoRecording() {

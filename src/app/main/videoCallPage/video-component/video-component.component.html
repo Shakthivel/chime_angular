@@ -14,7 +14,7 @@
    <div class="video-section">
        <div *ngIf="!isScreenPinned" class="grid-video-section">
            <div class="grid_video_card" *ngFor="let _ of [].constructor(9)" (click)="changePinStatus()">
-        <!-- video-element-1 -->   
+        <!-- video-element-1 -->
         </div>
        </div>
        <div *ngIf="isScreenPinned" class="pin-video-section ">
@@ -24,8 +24,9 @@
             <audio #audioElement></audio>
            </div>
            <div class="other-participants" >
-               <div class="other-video" *ngFor="let _ of [].constructor(10)">
-                <!-- video-element-1 -->
+               <div class="other-video" *ngFor="let i of [].constructor(10)">
+                 <video id="videoElement_{{i}}" #videoElement [height]="450">
+                 </video>
                </div>
            </div>
        </div>
