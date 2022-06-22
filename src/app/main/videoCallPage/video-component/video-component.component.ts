@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MeetingSessionService } from '../../../core/services/meeting-session/meeting-session.service';
+import { DefaultModality, DefaultVideoTile } from 'amazon-chime-sdk-js';
 
 @Component({
   selector: 'app-video-component',
@@ -22,6 +23,26 @@ export class VideoComponentComponent implements OnInit {
 
   constructor(private meetingSessionService: MeetingSessionService) {}
 
+  //TODO: uncomment below
+  // observer = {
+  //   // videoTileDidUpdate is called whenever a new tile is created or tileState changes.
+  //   videoTileDidUpdate: (tileState: any) => {
+  //     // Ignore a tile without attendee ID and other attendee's tile.
+  //     console.log('videoTileDidUpdate');
+  //     console.log(tileState);
+  //     if (!tileState.boundAttendeeId || !tileState.localTile) {
+  //       return;
+  //     }
+  //     this.meetingSessionService.meetingSession.audioVideo.bindVideoElement(tileState.tileId,this.videoElement.nativeElement);
+  //     //videoElement-1, videoElement-2
+  //   },
+  //   audioVideoDidStart: (tileState: any) => {
+  //     console.log('audioVideoDidStart()');
+  //     console.log(tileState);
+  //     this.meetingSessionService.meetingSession.audioVideo.startLocalVideoTile();
+  //   },
+  // };
+
   observer = {
     videoTileDidUpdate: (tileState: any) => {
       console.log('videoTileDidUpdate');
@@ -31,10 +52,11 @@ export class VideoComponentComponent implements OnInit {
       }
       this.meetingSessionService.meetingSession.audioVideo.bindVideoElement(tileState.tileId,document.getElementById("videoElement_"+tileState.tileId) as HTMLVideoElement);
     },
-    audioVideoDidStart: (tileState: any) => {
-      console.log('audioVideoDidStart()');
-      console.log(tileState);
-      this.meetingSessionService.meetingSession.audioVideo.startLocalVideoTile();
+    contentShareDidStart: () => {
+      console.log('Screen share started');
+    },
+    contentShareDidStop: () => {
+      console.log('Content share stopped');
     },
   };
 
@@ -42,25 +64,44 @@ export class VideoComponentComponent implements OnInit {
     this.meetingSessionService.meetingSession.audioVideo.addObserver(this.observer);
   }
 
-  async toggleCamera() {
-    console.log('camera toggled', this.isCamOff);
-    if (this.isCamOff) {
-      await this.meetingSessionService.meetingSession.audioVideo.startVideoInput(
-        this.meetingSessionService.selectedVideoInput
-      );
-      this.meetingSessionService.meetingSession.audioVideo.startLocalVideoTile();
-    }
-    else
-      await this.meetingSessionService.meetingSession.audioVideo.stopVideoInput();
-    this.isCamOff = !this.isCamOff;
+  // async toggleCamera() {
+  //   console.log('camera toggled', this.isCamOff);
+  //   if (this.isCamOff) {
+  //     await this.meetingSessionService.meetingSession.audioVideo.startVideoInput(
+  //       this.meetingSessionService.selectedVideoInput
+  //     );
+  //     this.meetingSessionService.meetingSession.audioVideo.startLocalVideoTile();
+  //   }
+  //   //pass the tile html elem as param here
+  //   else
+  //     await this.meetingSessionService.meetingSession.audioVideo.stopVideoInput();
+  //   this.isCamOff = !this.isCamOff;
+  // }
+
+  changeSpeakerStatus() {
+    this.speakerOff = !this.speakerOff;
+  }
+  changeMicStatus() {
+    this.micOff = !this.micOff;
   }
 
-  changeSpeakerStatus(){
-    this.speakerOff = ! this.speakerOff;
+  async changeScreenShareStatus() {
+    this.shareOff = !this.shareOff;
+    if (!this.shareOff) {
+      const contentShareStream =
+        await this.meetingSessionService.meetingSession.audioVideo.startContentShareFromScreenCapture();
+        DefaultVideoTile.connectVideoStreamToVideoElement(
+          contentShareStream,
+          this.videoElement.nativeElement,
+          false
+        );
+
+    } else {
+      await this.meetingSessionService.meetingSession.audioVideo.stopContentShare();
+    }
+
   }
-  changeMicStatus(){this.micOff = ! this.micOff;}
-  changeScreenShareStatus(){this.shareOff = !this.shareOff;}
-  changePinStatus(){
+  changePinStatus() {
     this.isScreenPinned = !this.isScreenPinned;
   }
   //
@@ -72,7 +113,7 @@ export class VideoComponentComponent implements OnInit {
   }
   //
   stopVideoRecording() {
-    this.isCamOff=true;
+    this.isCamOff = true;
     this.meetingSessionService.stopVideoInput();
     this.meetingSessionService.meetingSession.audioVideo.stopLocalVideoTile();
   }

@@ -14,8 +14,8 @@
    <div class="video-section">
        <!-- <div *ngIf="!isScreenPinned" class="grid-video-section"> -->
         <div class="grid-video-section">
-           <!-- <div class="grid_video_card" *ngFor="let _ of participants|keyvalue;let i = index"> -->
-            <div class="grid_video_card" *ngFor="let _ of [].constructor(10);let i = index">
+           <div class="grid_video_card" *ngFor="let _ of participants|keyvalue;let i = index">
+            <!-- <div class="grid_video_card" *ngFor="let _ of [].constructor(10);let i = index"> -->
                 <video class="grid_videoElement" id="{{'videoElement_'+(i+1)}}">
             </video>  
         </div>
