@@ -1,17 +1,17 @@
 <div class="test-page">
     <div class="test-profile-box">
-      <video #videoElement [height]="450">
+      <video #videoElement [height]="450" [style.display]="videoDisplay">
       </video>
         <div class="test-profile-logo" *ngIf="!isVideoRecording">
             <i class="far fa-user profile-icon"></i>
         </div>
     </div>
     <div class="test-button-section">
-        <button class="test-button-media" *ngIf="!isAudioRecording" >
+        <button class="test-button-media" *ngIf="!isAudioRecording" (click)="startAudioRecording()">
             <i class='fas fa-microphone-slash media-icon-disable'></i>
             Unmute
         </button>
-        <button class="test-button-media" *ngIf="isAudioRecording" >
+        <button class="test-button-media" *ngIf="isAudioRecording" (click)="stopAudioRecording()">
             <i class='fas fa-microphone media-icon-enable'></i>
             Mute
         </button>

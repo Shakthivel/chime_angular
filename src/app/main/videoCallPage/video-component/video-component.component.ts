@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MeetingSessionService } from '../../../core/services/meeting-session/meeting-session.service';
 import { DefaultModality, DefaultVideoTile } from 'amazon-chime-sdk-js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-video-component',
@@ -21,7 +22,7 @@ export class VideoComponentComponent implements OnInit {
   
   isScreenPinned:boolean = true;
 
-  constructor(private meetingSessionService: MeetingSessionService) {}
+  constructor(private router: Router, private meetingSessionService: MeetingSessionService) {}
 
   //TODO: uncomment below
   // observer = {
@@ -116,5 +117,9 @@ export class VideoComponentComponent implements OnInit {
     this.isCamOff = true;
     this.meetingSessionService.stopVideoInput();
     this.meetingSessionService.meetingSession.audioVideo.stopLocalVideoTile();
+  }
+
+  leaveMeeting() {
+    this.router.navigate(['/leave']);
   }
 }

@@ -117,6 +117,7 @@ export class TestpageComponent implements OnInit {
 
   startVideoRecording() {
     this.isVideoRecording = true;
+    this.videoDisplay = 'block';
     this.meetingSessionService.startVideoInput().then(()=>console.log('video input started')).then(()=>{
       this.meetingSessionService.meetingSession.audioVideo.addObserver(this.observer);
       this.meetingSessionService.meetingSession.audioVideo.start();
@@ -125,6 +126,7 @@ export class TestpageComponent implements OnInit {
 
   stopVideoRecording(){
     this.isVideoRecording = false;
+    this.videoDisplay = 'none';
     this.meetingSessionService.stopVideoInput();
   }
 
@@ -134,6 +136,7 @@ export class TestpageComponent implements OnInit {
   }
 
   startAudioRecording() {
+    this.isAudioRecording = true;
     // if (!this.isAudioRecording) {
     //   this.isAudioRecording = true;
     //   this.audioRecordingService.startRecording();
@@ -141,6 +144,7 @@ export class TestpageComponent implements OnInit {
   }
 
   abortAudioRecording() {
+    this.isAudioRecording = false;
     // if (this.isAudioRecording) {
     //   this.isAudioRecording = false;
     //   this.audioRecordingService.abortRecording();
@@ -148,6 +152,7 @@ export class TestpageComponent implements OnInit {
   }
 
   stopAudioRecording() {
+    this.isAudioRecording = false;
     // if (this.isAudioRecording) {
     //   this.audioRecordingService.stopRecording();
     //   this.isAudioRecording = false;
