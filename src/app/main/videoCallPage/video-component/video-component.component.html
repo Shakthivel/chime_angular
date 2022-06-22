@@ -48,7 +48,7 @@
            <div *ngIf="micOff" class="icon-img button disabled-icon" (click)="changeMicStatus()">
                <img src="assets/icons/mic_off.png"/>
            </div>
-           <div *ngIf="!isCamOff" class="icon-img button" >
+           <div *ngIf="!isCamOff" class="icon-img button" (click)="stopVideoRecording()" >
                <img src="assets/icons/camera.png"/>
            </div>
            <div *ngIf="isCamOff" class="icon-img button disabled-icon" (click)="startVideoRecording()">

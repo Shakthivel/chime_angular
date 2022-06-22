@@ -123,6 +123,10 @@ export class TestpageComponent implements OnInit {
     });
   }
 
+  stopVideoRecording(){
+    this.isVideoRecording = false;
+    this.meetingSessionService.stopVideoInput();
+  }
 
 
   downloadVideoRecordedData() {

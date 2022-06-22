@@ -84,5 +84,10 @@ export class MeetingSessionService {
     await this.meetingSession.audioVideo.startVideoInput(this.selectedVideoInput['deviceId']);
   }
 
+  stopVideoInput()
+  {
+    this.meetingSession.audioVideo.stopVideoInput(this.selectedVideoInput['deviceId']);
+  }
+
 
 }

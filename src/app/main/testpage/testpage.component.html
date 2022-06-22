@@ -19,7 +19,7 @@
             <i class='fas fa-video-slash media-icon-disable'></i>
             Start Video
         </button>
-        <button class="test-button-media" *ngIf="isVideoRecording" >
+        <button class="test-button-media" *ngIf="isVideoRecording" (click)="stopVideoRecording()">
             <i class='fas fa-video media-icon-enable'></i>
             Stop Video
         </button>

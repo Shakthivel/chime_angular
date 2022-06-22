@@ -110,17 +110,15 @@ export class VideoComponentComponent implements OnInit {
   }
   //
   startVideoRecording() {
+    this.isCamOff=false;
     this.meetingSessionService.startVideoInput().then(()=>console.log('video input started')).then(()=>{
       this.meetingSessionService.meetingSession.audioVideo.addObserver(this.observer);
       this.meetingSessionService.meetingSession.audioVideo.start();
     });
   }
   //
-  // stopVideoRecording() {
-  //     this.isCamOff = true;
-  //     this.videoRecordingService.stopRecording();
-  //     this.videoRecordingService.abortRecording();
-  //     this.video.srcObject = this.videoBlobUrl;
-  //     this.videoDisplay = 'none';
-  // }
+  stopVideoRecording() {
+    this.isCamOff=true;
+    this.meetingSessionService.stopVideoInput();
+  }
 }
