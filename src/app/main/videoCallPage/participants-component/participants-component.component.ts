@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { MeetingSessionService } from 'src/app/core/services/meeting-session/meeting-session.service';
 import { KeyValue } from '@angular/common';
 
@@ -8,12 +8,12 @@ import { KeyValue } from '@angular/common';
   styleUrls: ['./participants-component.component.scss'],
 })
 export class ParticipantsComponentComponent implements OnInit {
-  attendees: any = {};
-  constructor(private meetingSessionService: MeetingSessionService) {
-    this.meetingSessionService.updateParticipant();
-  }
+
+  @Input() participants: any;
+
+  constructor(private meetingSessionService: MeetingSessionService) {}
 
   ngOnInit(): void {
-
+    console.log(this.participants);
   }
 }

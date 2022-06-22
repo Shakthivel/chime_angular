@@ -82,32 +82,28 @@ export class VideoComponentComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    this.meetingSessionService.meetingSession.audioVideo.addObserver(this.observer);
     this.meetingSessionService.startAudioInput().then(()=>console.log('audio input started'));
     this.meetingSessionService.startAudioOutput().then(()=> {
       console.log('audion output started');
       // this.meetingSessionService.meetingSession.audioVideo.bindAudioElement(this.audioElement);
-     
     });
-    for(let i=1;i<9;i++)
-    {
-      this.videoElements[i] = document.getElementById("videoElement_"+i) as HTMLVideoElement;
-    }
     
   }
 
-  async toggleCamera() {
-    console.log('camera toggled', this.isCamOff);
-    if (this.isCamOff) {
-      await this.meetingSessionService.meetingSession.audioVideo.startVideoInput(
-        this.meetingSessionService.selectedVideoInput
-      );
-      this.meetingSessionService.meetingSession.audioVideo.startLocalVideoTile();
-    }
-    //pass the tile html elem as param here
-    else
-      await this.meetingSessionService.meetingSession.audioVideo.stopVideoInput();
-    this.isCamOff = !this.isCamOff;
-  }
+  // async toggleCamera() {
+  //   console.log('camera toggled', this.isCamOff);
+  //   if (this.isCamOff) {
+  //     await this.meetingSessionService.meetingSession.audioVideo.startVideoInput(
+  //       this.meetingSessionService.selectedVideoInput
+  //     );
+  //     this.meetingSessionService.meetingSession.audioVideo.startLocalVideoTile();
+  //   }
+  //   //pass the tile html elem as param here
+  //   else
+  //     await this.meetingSessionService.meetingSession.audioVideo.stopVideoInput();
+  //   this.isCamOff = !this.isCamOff;
+  // }
 
   changeSpeakerStatus(){
     this.speakerOff = ! this.speakerOff;
@@ -121,7 +117,6 @@ export class VideoComponentComponent implements OnInit {
   startVideoRecording() {
     this.isCamOff=false;
     this.meetingSessionService.startVideoInput().then(()=>console.log('video input started')).then(()=>{
-      this.meetingSessionService.meetingSession.audioVideo.addObserver(this.observer);
       this.meetingSessionService.meetingSession.audioVideo.start();
     });
   }

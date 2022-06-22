@@ -12,13 +12,13 @@
            </div>
    </div>
    <div class="video-section">
-       <div *ngIf="!isScreenPinned" class="grid-video-section">
-           <div class="grid_video_card" *ngFor="let _ of [].constructor(9);let i = index" (click)="changePinStatus()">
-
+       <!-- <div *ngIf="!isScreenPinned" class="grid-video-section"> -->
+        <!-- <div class="grid-video-section">
+           <div class="grid_video_card" *ngFor="let _ of [].constructor(9);let i = index">
                 <video class="grid_videoElement" id="{{'videoElement_'+(i+1)}}">
             </video>  
         </div>
-       </div>
+       </div> -->
        <div *ngIf="isScreenPinned" class="pin-video-section ">
            <div class="pinned-video" >
             <video #videoElement [height]="450">
