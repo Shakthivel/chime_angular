@@ -128,6 +128,7 @@ export class TestpageComponent implements OnInit {
     this.isVideoRecording = false;
     this.videoDisplay = 'none';
     this.meetingSessionService.stopVideoInput();
+    this.meetingSessionService.meetingSession.audioVideo.stop();
   }
 
 

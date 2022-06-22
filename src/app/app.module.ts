@@ -24,10 +24,8 @@ import { PostMeetingComponent } from './main/post-meeting/post-meeting.component
     ParticipantsComponentComponent,
     VideoComponentComponent,
     TestpageComponent,
-    PostMeetingComponent,
-  ],
+    PostMeetingComponent
   imports: [
-    BrowserModule,
     AppRoutingModule,
     WebcamModule,
     HttpClientModule,
