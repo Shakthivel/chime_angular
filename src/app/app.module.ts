@@ -25,6 +25,7 @@ import { PostMeetingComponent } from './main/post-meeting/post-meeting.component
     VideoComponentComponent,
     TestpageComponent,
     PostMeetingComponent
+  ],
   imports: [
     AppRoutingModule,
     WebcamModule,
