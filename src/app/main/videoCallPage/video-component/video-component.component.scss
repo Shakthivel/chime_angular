@@ -62,13 +62,10 @@
                 width: 15%;
                 position: relative;
                 .other-video{
+                    aspect-ratio: 1;
                     background-color: black;
                     margin:5px 0px;
                     border-radius: 10px;
-                    video{
-                    width:100%;
-                    aspect-ratio: 1;
-                    }
                 }
             }
             .other-participants:hover{
@@ -90,11 +87,6 @@
             .grid_video_card{
                 background-color: black;
                 border-radius: 10px;
-                .grid_videoElement{
-                    height:100%;
-                    width:100%;
-                    object-fit: cover;
-                }
             }
         
         }
