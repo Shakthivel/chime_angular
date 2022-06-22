@@ -36,7 +36,7 @@ export class MeetingSessionService {
   }
 
   setup(meeting: any, attendee: any): void {
-    this.logger = new ConsoleLogger('MyLogger', LogLevel.INFO);
+    this.logger = new ConsoleLogger('MyLogger', LogLevel.OFF);
     this.deviceController = new DefaultDeviceController(this.logger);
     this.meeting = meeting;
     this.attendee = attendee;
@@ -89,5 +89,14 @@ export class MeetingSessionService {
     this.meetingSession.audioVideo.stopVideoInput(this.selectedVideoInput['deviceId']);
   }
 
+  async updateParticipant(){
+    this.meetingSession.audioVideo.realtimeSubscribeToAttendeeIdPresence(
+      (presentAttendeeId: any, present: boolean, externalUserId: string) => {
+        console.log(
+          `Attendee ID: ${presentAttendeeId} Present: ${present}, EUID: ${externalUserId}`
+        );
+      }
+    );
+  }
 
 }

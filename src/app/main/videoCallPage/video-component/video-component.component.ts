@@ -12,6 +12,8 @@ import { MeetingSessionService } from '../../../core/services/meeting-session/me
 export class VideoComponentComponent implements OnInit {
   @ViewChild('videoElement') videoElement: any;
   @ViewChild('audioElement') audioElement: any;
+  videoElements:HTMLVideoElement[] = [];
+  
   isCamOff:boolean = true;
   // video!: any;
   // videoDisplay = 'none';
@@ -25,6 +27,7 @@ export class VideoComponentComponent implements OnInit {
   speakerOff:boolean = false;
   micOff:boolean = true;
   shareOff:boolean = true;
+  index = 0;
   
   isScreenPinned:boolean = true;
 
@@ -65,10 +68,10 @@ export class VideoComponentComponent implements OnInit {
       // Ignore a tile without attendee ID and other attendee's tile.
       console.log('videoTileDidUpdate');
       console.log(tileState);
-      if (!tileState.boundAttendeeId || !tileState.localTile) {
+      if (!tileState.boundAttendeeId) {
         return;
       }
-      this.meetingSessionService.meetingSession.audioVideo.bindVideoElement(tileState.tileId,this.videoElement.nativeElement);
+      this.meetingSessionService.meetingSession.audioVideo.bindVideoElement(tileState.tileId,document.getElementById("videoElement_"+tileState.tileId) as HTMLVideoElement);
       //videoElement-1, videoElement-2
     },
     audioVideoDidStart: (tileState: any) => {
@@ -83,7 +86,13 @@ export class VideoComponentComponent implements OnInit {
     this.meetingSessionService.startAudioOutput().then(()=> {
       console.log('audion output started');
       // this.meetingSessionService.meetingSession.audioVideo.bindAudioElement(this.audioElement);
+     
     });
+    for(let i=1;i<9;i++)
+    {
+      this.videoElements[i] = document.getElementById("videoElement_"+i) as HTMLVideoElement;
+    }
+    
   }
 
   async toggleCamera() {
