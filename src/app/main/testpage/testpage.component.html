@@ -8,28 +8,6 @@
     <div class="test-profile-logo">
         <i class="far fa-user profile-icon"></i>
     </div>
-  <div>
-    <div class="test-button-section">
-        <button class="test-button-media" *ngIf="!isAudioRecording" (click)="startAudioRecording()">
-            <i class='fas fa-microphone-slash media-icon-disable'></i>
-            Unmute
-        </button>
-        <button class="test-button-media" *ngIf="isAudioRecording" (click)="stopAudioRecording()">
-            <i class='fas fa-microphone media-icon-enable'></i>
-            Mute
-        </button>
-        <button class="test-button-media" *ngIf="!isVideoRecording" (click)="startVideoRecording()">
-            <i class='fas fa-video-slash media-icon-disable'></i>
-            Start Video
-        </button>
-        <button class="test-button-media" *ngIf="isVideoRecording" (click)="stopVideoRecording()">
-            <i class='fas fa-video media-icon-enable'></i>
-            Stop Video
-        </button>
-        <button class="test-button-status" (click)="redirectToMeet()">
-            Join Meeting
-        </button>
-    </div>
   </div>
   <div class="test-button-section">
       <button class="test-button-media" *ngIf="!isAudioRecording" (click)="startAudioRecording()">
