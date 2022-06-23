@@ -6,6 +6,7 @@ import {
   LogLevel,
   MeetingSessionConfiguration, VideoSource
 } from "amazon-chime-sdk-js";
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,11 @@ export class MeetingSessionService {
   selectedAudioInput: any;
   selectedAudioOutput: any;
   selectedVideoInput: any;
+
+
+  newParticipant = new Subject<any>();
+  removeParticipant = new Subject<any>();
+  participantCount = new Subject<number>();
 
 
   constructor() {
