@@ -12,6 +12,7 @@ import { JoinMeetingComponent } from './main/joinMeetingPage/join-meeting/join-m
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestpageComponent } from './main/testpage/testpage.component';
 import { CreateMeetingComponent } from './main/createMeetingPage/create-meeting/create-meeting.component';
+import { PostMeetingComponent } from './main/post-meeting/post-meeting.component';
 
 
 @NgModule({
@@ -23,9 +24,9 @@ import { CreateMeetingComponent } from './main/createMeetingPage/create-meeting/
     ParticipantsComponentComponent,
     VideoComponentComponent,
     TestpageComponent,
+    PostMeetingComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     WebcamModule,
     HttpClientModule,

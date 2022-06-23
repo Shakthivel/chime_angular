@@ -1,3 +1,4 @@
+
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -17,6 +18,7 @@ import { MeetingSessionService } from '../../../core/services/meeting-session/me
   templateUrl: './video-component.component.html',
   styleUrls: ['./video-component.component.scss'],
 })
+
 export class VideoComponentComponent implements OnInit, AfterViewInit {
   @ViewChild('audioElement') audioElement: any;
   @ViewChild('aEl') aEl: any;
@@ -33,7 +35,10 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
   isScreenPinned: boolean = true;
   presenterId: any;
 
-  constructor(private meetingSessionService: MeetingSessionService) {}
+  constructor(private router: Router, private meetingSessionService: MeetingSessionService) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    this.meetingSessionService.meetingSession.audioVideo.addObserver(this.observer);
+  }
 
   observer = {
     videoTileDidUpdate: (tileState: any) => {
@@ -194,5 +199,9 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
     this.isCamOff = true;
     this.meetingSessionService.stopVideoInput();
     this.meetingSessionService.meetingSession.audioVideo.stopLocalVideoTile();
+  }
+
+  leaveMeeting() {
+    this.router.navigate(['/leave']);
   }
 }
