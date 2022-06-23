@@ -12,6 +12,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { MeetingSessionService } from '../../../core/services/meeting-session/meeting-session.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-video-component',
@@ -36,9 +37,6 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
   presenterId: any;
 
   constructor(private router: Router, private meetingSessionService: MeetingSessionService) {}
-  ngOnChanges(changes: SimpleChanges): void {
-    this.meetingSessionService.meetingSession.audioVideo.addObserver(this.observer);
-  }
 
   observer = {
     videoTileDidUpdate: (tileState: any) => {
@@ -202,6 +200,7 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
   }
 
   leaveMeeting() {
+    this.meetingSessionService.meetingSession.audioVideo.stop();
     this.router.navigate(['/leave']);
   }
 }
