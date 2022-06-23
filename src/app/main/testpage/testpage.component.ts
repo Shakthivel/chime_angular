@@ -34,54 +34,9 @@ export class TestpageComponent implements OnInit {
   videoConf = { video: { facingMode:"user", width: 320 }, audio: true}
 
   constructor(
-    // private ref: ChangeDetectorRef,
-    // private audioRecordingService: AudioRecordingService,
-    // private videoRecordingService: VideoRecordingService,
-    // private sanitizer: DomSanitizer,
     private router: Router,
-    // private meetingSessionService: MeetingSessionService
     private meetingSessionService: MeetingSessionService
-  ) {
-
-//     this.videoRecordingService.recordingFailed().subscribe(() => {
-//       this.isVideoRecording = false;
-//       this.ref.detectChanges();
-//     });
-
-//     this.videoRecordingService.getRecordedTime().subscribe((time) => {
-//       this.videoRecordedTime = time;
-//       this.ref.detectChanges();
-//     });
-
-//     this.videoRecordingService.getStream().subscribe((stream) => {
-//       this.videoStream = stream;
-//       this.ref.detectChanges();
-//     });
-
-//     this.videoRecordingService.getRecordedBlob().subscribe((data) => {
-//       this.videoBlob = data.blob;
-//       this.videoName = data.title;
-//       this.videoBlobUrl = this.sanitizer.bypassSecurityTrustUrl(data.url);
-//       this.ref.detectChanges();
-//     });
-
-//     this.audioRecordingService.recordingFailed().subscribe(() => {
-//       this.isAudioRecording = false;
-//       this.ref.detectChanges();
-//  });
-
-//     this.audioRecordingService.getRecordedTime().subscribe((time) => {
-//       this.audioRecordedTime = time;
-//       this.ref.detectChanges();
-//     });
-
-//     this.audioRecordingService.getRecordedBlob().subscribe((data) => {
-//       this.audioBlob = data.blob;
-//       this.audioName = data.title;
-//       this.audioBlobUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data.blob));
-//       this.ref.detectChanges();
-//     });
-  }
+  ) {}
 
   ngOnInit() {
     this.meetingSessionService.getAudioInputDevices().then(data=> {

@@ -8,6 +8,28 @@
     <div class="test-profile-logo">
         <i class="far fa-user profile-icon"></i>
     </div>
+  <div>
+    <div class="test-button-section">
+        <button class="test-button-media" *ngIf="!isAudioRecording" (click)="startAudioRecording()">
+            <i class='fas fa-microphone-slash media-icon-disable'></i>
+            Unmute
+        </button>
+        <button class="test-button-media" *ngIf="isAudioRecording" (click)="stopAudioRecording()">
+            <i class='fas fa-microphone media-icon-enable'></i>
+            Mute
+        </button>
+        <button class="test-button-media" *ngIf="!isVideoRecording" (click)="startVideoRecording()">
+            <i class='fas fa-video-slash media-icon-disable'></i>
+            Start Video
+        </button>
+        <button class="test-button-media" *ngIf="isVideoRecording" (click)="stopVideoRecording()">
+            <i class='fas fa-video media-icon-enable'></i>
+            Stop Video
+        </button>
+        <button class="test-button-status" (click)="redirectToMeet()">
+            Join Meeting
+        </button>
+    </div>
   </div>
   <div class="test-button-section">
       <button class="test-button-media" *ngIf="!isAudioRecording" (click)="startAudioRecording()">
@@ -30,38 +52,4 @@
           Join Meeting
       </button>
   </div>
-  <!-- <div>
-      <div>Audio</div>
-      <div>
-        <button class="start-button" *ngIf="!isAudioRecording && !audioBlobUrl" (click)="startAudioRecording()">Start Audio Recording</button>
-        <button class="stop-button" *ngIf="isAudioRecording && !audioBlobUrl" (click)="stopAudioRecording()">Stop Audio Recording</button>
-        <button class="cancel-button" *ngIf="!isAudioRecording && audioBlobUrl" (click)="clearAudioRecordedData()">Clear Audio Recording</button>
-        <button class="download-button" *ngIf="!isAudioRecording && audioBlobUrl" (click)="downloadAudioRecordedData()">Download Audio Recording</button>
-        <div id="audioTimer" *ngIf="isAudioRecording && !audioBlobUrl"> {{ audioRecordedTime }} </div>
-        <audio *ngIf="!isAudioRecording && audioBlobUrl"  controls>
-          <source [src]="audioBlobUrl" type="audio/mp3">
-        </audio>
-      </div>
-    </div>
-    <div>
-      <div>Video</div>
-      <div>
-        <button class="start-button" *ngIf="!isVideoRecording && !videoBlobUrl" (click)="startVideoRecording()">Start Video Recording</button>
-        <button class="stop-button" *ngIf="isVideoRecording && !videoBlobUrl" (click)="stopVideoRecording()">Stop Video Recording</button>
-        <button class="cancel-button" *ngIf="!isVideoRecording && videoBlobUrl" (click)="clearVideoRecordedData()">Clear Video Recording</button>
-        <button class="download-button" *ngIf="!isVideoRecording && videoBlobUrl" (click)="downloadVideoRecordedData()">Download Video Recording</button>
-        <div id="videoTimer" *ngIf="isVideoRecording && !videoBlobUrl"> {{ videoRecordedTime }} </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="text-center">
-          <h3>
-              <video #videoElement>
-                  <source *ngIf="!isVideoRecording && videoBlobUrl" [src]="videoBlobUrl">
-                </video>
-          </h3>
-        </div>
-      </div>
-    </div> -->
 </div>
