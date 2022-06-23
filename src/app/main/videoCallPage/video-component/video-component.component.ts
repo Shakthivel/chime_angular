@@ -31,6 +31,7 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
   tileStorage: any = {};
 
   isScreenPinned: boolean = true;
+  presenterId: any;
 
   constructor(private meetingSessionService: MeetingSessionService) {}
 
@@ -41,7 +42,7 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
       if (!tileState.boundAttendeeId) {
         return;
       }
-
+      // if (tileState.isContent) this.presenterId = tileState.boundAttendeeId;
       this.tileStorage[tileState.boundAttendeeId] = tileState.tileId;
 
       let checkElement = document.getElementById(
@@ -60,6 +61,7 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
         );
         element.appendChild(video);
         document.getElementById('grid-video-section')?.appendChild(element);
+        console.log(element);
       } else {
         this.meetingSessionService.meetingSession.audioVideo.bindVideoElement(
           tileState.tileId,
@@ -70,19 +72,35 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
       }
     },
     videoTileWasRemoved: (tileId: number) => {
-      let key: string = '';
-      Object.keys(this.tileStorage).forEach((item) => {
-        if (this.tileStorage[item] === tileId) {
-          key = item;
-        }
-      });
-      document.getElementById('divVid_' + key)?.remove();
-      delete this.tileStorage[key];
+      console.log('video tile remove is triggered');
+
+      // let key: string = '';
+      // Object.keys(this.tileStorage).forEach((item) => {
+      //   if (this.tileStorage[item] === tileId) {
+      //     key = item;
+      //   }
+      // });
+  
+
+      // document.getElementById('divVid_' + key)?.remove();
+      
+      // delete this.tileStorage[key];
+     
+    },
+    audioVideoDidStop: (sessionStatus: any) => {
+      // See the "Stopping a session" section for details.
+      console.log(
+        'Stopped with a session status code: ',
+        sessionStatus.statusCode()
+      );
     },
     contentShareDidStart: () => {
       console.log('Screen share started');
     },
     contentShareDidStop: () => {
+      // console.log(this.presenterId);
+      // document.getElementById('divVid_' + this.presenterId)?.remove();
+      // document.getElementById('videoElement_' + this.presenterId)?.remove();
       console.log('Content share stopped');
     },
     audioVideoDidStart: async () => {
@@ -99,15 +117,19 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
       this.observer
     );
     this.meetingSessionService.newParticipant.subscribe((data: any) => {
-      let checkElement = document.getElementById('videoElement_' + data.id);
-      if (!checkElement) {
+      let checkElement = document.getElementById('divVid_' + data.id);
+      if (!checkElement && data.present) {
         let element = document.createElement('div');
         element.className = 'grid_video_card';
         let video = document.createElement('video');
         video.className = 'grid_videoElement';
         video.id = 'videoElement_' + data.id;
+        element.id = 'divVid_' + data.id;
         element.appendChild(video);
         document.getElementById('grid-video-section')?.appendChild(element);
+        console.log(element);
+      }else{
+        document.getElementById('divVid_' + data.id)?.remove();
       }
     });
     this.meetingSessionService.meetingSession.audioVideo.start();
