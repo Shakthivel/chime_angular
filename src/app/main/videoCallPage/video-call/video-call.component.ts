@@ -23,6 +23,8 @@ export class VideoCallComponent implements OnInit {
         } else {
           delete this.participants[presentAttendeeId];
         }
+        this.meetingSessionService.newParticipant.next({id: presentAttendeeId, username: externalUserId});
+        this.meetingSessionService.participants.next(this.participants);
       }
     );
   }

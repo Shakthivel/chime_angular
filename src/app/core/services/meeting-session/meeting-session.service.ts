@@ -34,6 +34,7 @@ export class MeetingSessionService {
   newParticipant = new Subject<any>();
   removeParticipant = new Subject<any>();
   participantCount = new Subject<number>();
+  participants = new Subject<any>();
 
   constructor() {}
 

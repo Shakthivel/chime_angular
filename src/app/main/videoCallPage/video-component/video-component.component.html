@@ -13,14 +13,9 @@
    </div>
    <div class="video-section">
        <!-- <div *ngIf="!isScreenPinned" class="grid-video-section"> -->
-        <div class="grid-video-section">
-            <div class="grid_video_card" *ngFor="let _ of participants|keyvalue;let i = index">
-                <video class="grid_videoElement" id="{{'videoElement_'+(_.key)}}">
-                </video>
-                {{_.value}}
-            </div>
+        <div id="grid-video-section" class="grid-video-section">
             <audio #aEl></audio>
-       </div>
+        </div>
        <!-- <div *ngIf="isScreenPinned" class="pin-video-section ">
            <div class="pinned-video" >
             <video #videoElement [height]="450">
