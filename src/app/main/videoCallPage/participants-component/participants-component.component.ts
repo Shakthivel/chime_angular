@@ -16,4 +16,10 @@ export class ParticipantsComponentComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.participants);
   }
+
+  partLen(){
+    return Object.keys(this.participants).length;
+  }
+
+  
 }
