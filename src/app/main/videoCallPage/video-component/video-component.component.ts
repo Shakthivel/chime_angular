@@ -4,8 +4,11 @@ import {
   Component,
   ElementRef,
   Input,
-  OnInit, QueryList, Renderer2,
-  ViewChild, ViewChildren,
+  OnInit,
+  QueryList,
+  Renderer2,
+  ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import { MeetingSessionService } from '../../../core/services/meeting-session/meeting-session.service';
 
@@ -29,9 +32,7 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
 
   isScreenPinned: boolean = true;
 
-  constructor(
-    private meetingSessionService: MeetingSessionService,
-  ) {}
+  constructor(private meetingSessionService: MeetingSessionService) {}
 
   observer = {
     videoTileDidUpdate: (tileState: any) => {
@@ -43,14 +44,20 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
 
       this.tileStorage[tileState.boundAttendeeId] = tileState.tileId;
 
-      let checkElement = document.getElementById('videoElement_'+tileState.boundAttendeeId);
-      if(!checkElement) {
+      let checkElement = document.getElementById(
+        'videoElement_' + tileState.boundAttendeeId
+      );
+      if (!checkElement) {
         let element = document.createElement('div');
         element.className = 'grid_video_card';
         let video = document.createElement('video');
         video.className = 'grid_videoElement';
         video.id = 'videoElement_' + tileState.boundAttendeeId;
-        this.meetingSessionService.meetingSession.audioVideo.bindVideoElement(tileState.tileId, video as HTMLVideoElement);
+        element.id = 'divVid_' + tileState.boundAttendeeId;
+        this.meetingSessionService.meetingSession.audioVideo.bindVideoElement(
+          tileState.tileId,
+          video as HTMLVideoElement
+        );
         element.appendChild(video);
         document.getElementById('grid-video-section')?.appendChild(element);
       } else {
@@ -61,17 +68,15 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
           ) as HTMLVideoElement
         );
       }
-
-
     },
     videoTileWasRemoved: (tileId: number) => {
       let key: string = '';
-      Object.keys(this.tileStorage).forEach(item => {
-        if(this.tileStorage[item] === tileId) {
+      Object.keys(this.tileStorage).forEach((item) => {
+        if (this.tileStorage[item] === tileId) {
           key = item;
         }
       });
-      document.getElementById('videoElement_'+key)?.remove();
+      document.getElementById('divVid_' + key)?.remove();
       delete this.tileStorage[key];
     },
     contentShareDidStart: () => {
@@ -94,8 +99,8 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
       this.observer
     );
     this.meetingSessionService.newParticipant.subscribe((data: any) => {
-      let checkElement = document.getElementById('videoElement_'+data.id);
-      if(!checkElement) {
+      let checkElement = document.getElementById('videoElement_' + data.id);
+      if (!checkElement) {
         let element = document.createElement('div');
         element.className = 'grid_video_card';
         let video = document.createElement('video');
@@ -104,7 +109,7 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
         element.appendChild(video);
         document.getElementById('grid-video-section')?.appendChild(element);
       }
-    })
+    });
     this.meetingSessionService.meetingSession.audioVideo.start();
   }
 
