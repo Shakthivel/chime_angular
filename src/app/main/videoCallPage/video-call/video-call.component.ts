@@ -11,7 +11,6 @@ export class VideoCallComponent implements OnInit {
 
   participants: any = {};
 
-
   constructor( private meetingSessionService: MeetingSessionService) { }
 
   ngOnInit(): void {
