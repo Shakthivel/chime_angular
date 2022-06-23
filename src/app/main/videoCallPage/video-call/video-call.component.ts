@@ -20,6 +20,7 @@ export class VideoCallComponent implements OnInit {
       (presentAttendeeId: string, present: boolean, externalUserId: string) => {
         if (present) {
           this.participants[presentAttendeeId] = externalUserId.split('#')[1];
+          //this.participants[presentAttendeeId] = externalUserId
         } else {
           delete this.participants[presentAttendeeId];
         }

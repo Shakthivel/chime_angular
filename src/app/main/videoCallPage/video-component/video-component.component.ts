@@ -41,6 +41,9 @@ export class VideoComponentComponent implements OnInit {
   };
 
   ngOnInit(): void {
+     this.meetingSessionService.meetingSession.audioVideo.addContentShareObserver(
+       this.observer
+     );
     this.meetingSessionService.meetingSession.audioVideo.addObserver(this.observer);
   }
 
@@ -57,11 +60,13 @@ export class VideoComponentComponent implements OnInit {
     if (!this.shareOff) {
       const contentShareStream =
         await this.meetingSessionService.meetingSession.audioVideo.startContentShareFromScreenCapture();
-        DefaultVideoTile.connectVideoStreamToVideoElement(
-          contentShareStream,
-          this.videoElement.nativeElement,
-          false
-        );
+        console.log("after the prompt");
+        
+        // DefaultVideoTile.connectVideoStreamToVideoElement(
+        //   contentShareStream,
+        //   this.videoElement.nativeElement,
+        //   false
+        // );
 
     } else {
       await this.meetingSessionService.meetingSession.audioVideo.stopContentShare();
