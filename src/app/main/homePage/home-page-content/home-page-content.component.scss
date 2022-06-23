@@ -1,0 +1,64 @@
+.home-page-container{
+    padding: 2rem 5%;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    width: 100%;
+}
+
+nav{
+    margin-bottom: 3rem;
+}
+
+main {
+    display: flex;
+    justify-content: end;
+
+    .home-main-left{
+        flex-basis: 50%;
+        margin: auto 0;
+
+        h1{
+            width: 77.5%;
+            font-size: 3rem;
+            line-height: 1.2;
+            font-weight: 500;
+            margin-bottom: 2.5rem;
+        }
+
+        button{
+            background-color: rgb(70, 70, 240);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.05rem;
+            padding: 0.9rem 1.85rem;
+            color: white;
+        }
+    }
+
+    .home-main-right{
+        flex-basis: 50%;
+        text-align: center ;
+        padding-right: 7.5%;
+
+       
+    }
+}
+
+
+.home-main-right-item {    
+    img{
+        height: auto;
+        margin: 1;
+    }
+    
+    p{
+        width: 70%;
+        text-align: center;
+        margin: 0 auto;
+    }
+    .home-main-right-item_content{
+        width: 100%;
+        
+    }
+   }

@@ -1,0 +1,47 @@
+@import "../../../../variables.scss";
+.center-container{
+    height:100%;
+}
+
+.content{
+    font-family: "Segoe UI";
+    #joinMeetingtitle{
+        align-self: center;
+        font-size: 20px;
+        font-weight: 600;
+        margin: 10px;
+    }
+    .terms-notice,.join-button
+    {
+        margin:5px;
+    }
+    .input-label,.input-box{
+        margin:5px;
+    }
+    .input-label{
+        font-size: 14px;
+    }
+    .input-field{
+        padding: 10px;
+        font-size: 16px;
+    }
+}
+
+.input-field,.grey-button,.blue-button{
+    border-radius: 10px;
+    border: 1px solid ;
+    border-color: $color-grey-input-border;
+    width:100%;
+}
+
+.grey-button{
+padding: 10px;
+background-color:$color-grey-button-disabled;
+color:$color-grey-button-disabled-text;
+}
+
+.blue-button{
+    padding: 10px;
+    background-color:$color-blue-primary;
+    color:white;
+}

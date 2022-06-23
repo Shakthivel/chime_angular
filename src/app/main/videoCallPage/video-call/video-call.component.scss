@@ -1,0 +1,39 @@
+@import "../../../../variables.scss";
+.main-container{
+    font-family: "Segoe UI";
+}
+.page-container{
+    display: flex;
+    flex-direction: row;
+}
+.left-section{
+    flex-basis:5%;
+}
+.left-section,.middle-section{
+    border-right:2px $color-grey-input-border solid;
+}
+.middle-section{
+    flex-basis:70%;
+}
+
+.right-section{
+    flex-basis:25%;
+    height:100%;
+    background-color: white;
+}
+
+.left-section,.right-section,.middle-section{
+    overflow: hidden;
+}
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+   .left-section{
+    flex-basis: 0%;
+   }
+   .right-section{
+    flex-basis:0%;
+   }
+   .middle-section{
+    flex-basis: 100%;
+   }
+  }
