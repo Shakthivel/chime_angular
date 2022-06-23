@@ -44,7 +44,7 @@
             height:100%;
             display: flex;
             position: relative;
-            
+
             .pinned-video{
                 height:95%;
                 width: 85%;
@@ -85,7 +85,7 @@
             display: grid;
             grid-auto-flow: row;
             grid-auto-rows: 50%;
-            grid-template-columns:repeat(3,1fr); 
+            grid-template-columns:repeat(3,1fr);
             grid-gap: 10px;
             .grid_video_card{
                 background-color: black;
@@ -96,12 +96,11 @@
                     object-fit: cover;
                 }
             }
-        
         }
         .grid-video-section:hover{
             overflow-y: scroll;
         }
-        
+
     }
 
     #meetingFooter{
@@ -120,7 +119,7 @@
                 height:20px;
                 object-fit:cover;
             }
-        
+
         }
         .button{
             border:1px solid $color-grey-input-border;

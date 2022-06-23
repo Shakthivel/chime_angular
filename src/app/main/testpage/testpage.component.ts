@@ -40,10 +40,14 @@ export class TestpageComponent implements OnInit {
 
   ngOnInit() {
     this.meetingSessionService.getAudioInputDevices().then(data=> {
+      console.log(data);
+      
       this.meetingSessionService.audioInputDevices = data;
       this.meetingSessionService.setAudioInput(0);
     });
     this.meetingSessionService.getAudioOutputDevices().then(data=> {
+      console.log(data);
+      
       this.meetingSessionService.audioOutputDevices = data;
       this.meetingSessionService.setAudioOutput(0);
     });
@@ -51,6 +55,7 @@ export class TestpageComponent implements OnInit {
       this.meetingSessionService.videoInputDevices = data;
       this.meetingSessionService.setVideoInput(0);
     });
+
   }
   observer = {
     // videoTileDidUpdate is called whenever a new tile is created or tileState changes.
@@ -86,11 +91,6 @@ export class TestpageComponent implements OnInit {
     this.meetingSessionService.stopVideoInput();
   }
 
-
-  downloadVideoRecordedData() {
-    this._downloadFile(this.videoBlob, 'video/mp4', this.videoName);
-  }
-
   startAudioRecording() {
     this.isAudioRecording = true;
     // if (!this.isAudioRecording) {
@@ -115,29 +115,8 @@ export class TestpageComponent implements OnInit {
     // }
   }
 
-  clearAudioRecordedData() {
-    this.audioBlobUrl = null;
-  }
-
-  downloadAudioRecordedData() {
-    this._downloadFile(this.audioBlob, 'audio/mp3', this.audioName);
-  }
-
   ngOnDestroy(): void {
     this.abortAudioRecording();
-  }
-
-  _downloadFile(data: any, type: string, filename: string): any {
-    const blob = new Blob([data], { type: type });
-    const url = window.URL.createObjectURL(blob);
-    //this.video.srcObject = stream;
-    //const url = data;
-    const anchor = document.createElement('a');
-    anchor.download = filename;
-    anchor.href = url;
-    document.body.appendChild(anchor);
-    anchor.click();
-    document.body.removeChild(anchor);
   }
 
   redirectToMeet(){

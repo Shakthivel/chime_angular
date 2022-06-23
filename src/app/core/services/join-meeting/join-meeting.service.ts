@@ -33,7 +33,7 @@ export class JoinMeetingService {
   joinMeeting( meetingId: string, email: string, username: string) : Observable<any> {
     let region: string = 'us-east-1';
     // TODO: ECHO REDUCTION
-    let url = `${this.baseURL}join?title=${meetingId}&name=${username}&region=${region}`;
+    let url = `${this.baseURL}join?title=${meetingId}&name=${username}&region=${region}&ns_es=true`;
     return this.http.post(url, {});
   }
 

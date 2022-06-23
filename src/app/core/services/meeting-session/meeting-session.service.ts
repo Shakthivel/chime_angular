@@ -1,18 +1,18 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   ConsoleLogger,
   DefaultDeviceController,
   DefaultMeetingSession,
   LogLevel,
-  MeetingSessionConfiguration, VideoSource
-} from "amazon-chime-sdk-js";
-import {Subject} from "rxjs";
+  MeetingSessionConfiguration,
+  VideoSource,
+} from 'amazon-chime-sdk-js';
+import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MeetingSessionService {
-
   // Setup
   logger: ConsoleLogger | undefined;
   deviceController: DefaultDeviceController | undefined;
@@ -21,7 +21,6 @@ export class MeetingSessionService {
   attendee: any;
   configuration: any;
   meetingSession: any;
-
 
   //Devices
   audioInputDevices: any;
@@ -32,21 +31,22 @@ export class MeetingSessionService {
   selectedAudioOutput: any;
   selectedVideoInput: any;
 
-
   newParticipant = new Subject<any>();
   removeParticipant = new Subject<any>();
   participantCount = new Subject<number>();
+  participants = new Subject<any>();
 
-
-  constructor() {
-  }
+  constructor() {}
 
   setup(meeting: any, attendee: any): void {
     this.logger = new ConsoleLogger('MyLogger', LogLevel.OFF);
     this.deviceController = new DefaultDeviceController(this.logger);
     this.meeting = meeting;
     this.attendee = attendee;
-    this.configuration = new MeetingSessionConfiguration(this.meeting, this.attendee);
+    this.configuration = new MeetingSessionConfiguration(
+      this.meeting,
+      this.attendee
+    );
     this.meetingSession = new DefaultMeetingSession(
       this.configuration,
       this.logger,
@@ -79,22 +79,30 @@ export class MeetingSessionService {
   }
 
   async startAudioInput(): Promise<any> {
-    await this.meetingSession.audioVideo.startAudioInput(this.selectedAudioInput['deviceId']);
+    await this.meetingSession.audioVideo.startAudioInput(
+      this.selectedAudioInput['deviceId']
+    );
   }
 
   async startAudioOutput(): Promise<any> {
-    await this.meetingSession.audioVideo.chooseAudioOutput(this.selectedAudioOutput['deviceId']);
+    await this.meetingSession.audioVideo.chooseAudioOutput(
+      this.selectedAudioOutput['deviceId']
+    );
   }
 
   async startVideoInput(): Promise<any> {
-    await this.meetingSession.audioVideo.startVideoInput(this.selectedVideoInput['deviceId']);
+    await this.meetingSession.audioVideo.startVideoInput(
+      this.selectedVideoInput['deviceId']
+    );
   }
 
   async stopVideoInput(): Promise<any> {
-    await this.meetingSession.audioVideo.stopVideoInput(this.selectedVideoInput['deviceId']);
+    await this.meetingSession.audioVideo.stopVideoInput(
+      this.selectedVideoInput['deviceId']
+    );
   }
 
-  async updateParticipant(){
+  async updateParticipant() {
     this.meetingSession.audioVideo.realtimeSubscribeToAttendeeIdPresence(
       (presentAttendeeId: any, present: boolean, externalUserId: string) => {
         console.log(
@@ -103,5 +111,4 @@ export class MeetingSessionService {
       }
     );
   }
-
 }

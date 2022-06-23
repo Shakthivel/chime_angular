@@ -11,7 +11,12 @@
             <div class="participant-image icon-img">
                 <img src="https://w0.peakpx.com/wallpaper/999/880/HD-wallpaper-eren-yeager-attack-on-titan-shingeki-no-kyojin-manga-mikasa-anime-levi.jpg" alt="">
             </div>
-            <div class="participant-name">
+            <div class="participant-name" *ngIf="(''+item.key).split('#')[1]">
+              
+                <span>{{item.value}} (presentation)</span>
+            </div>
+            <div class="participant-name" *ngIf="!((''+item.key).split('#')[1])">
+           
                 <span>{{item.value}}</span>
             </div>
             <div class="participant-av row-container">
