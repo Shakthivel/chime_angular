@@ -1,24 +1,15 @@
-.bg-image {
-    /* The image used */
-    background-image: url("https://d1rytvr7gmk1sx.cloudfront.net/wp-content/uploads/2020/06/we-zoom-5.jpg?x93735");
-    
-    position: fixed;
+  .post-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     top: 0;
     left: 0;
-    /* Add the blur effect */
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
-    
-    /* Full height */
-    height: 100%; 
-    width: 100%;
-    
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  
+    min-width: 100%;
+    min-height: 100%;
+    background-color: #3A3B3C;
+}
+
   /* Position text in the middle of the page/image */
   .bg-text {
     background-color: rgb(0,0,0); /* Fallback color */

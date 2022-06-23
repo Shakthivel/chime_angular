@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { MeetingSessionService } from '../../../core/services/meeting-session/meeting-session.service';
 import { DefaultModality, DefaultVideoTile } from 'amazon-chime-sdk-js';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './video-component.component.html',
   styleUrls: ['./video-component.component.scss'],
 })
-export class VideoComponentComponent implements OnInit {
+export class VideoComponentComponent implements OnInit, OnChanges {
   @ViewChild('videoElement') videoElement: any;
   @ViewChild('audioElement') audioElement: any;
   videoElements:HTMLVideoElement[] = [];
@@ -23,6 +23,9 @@ export class VideoComponentComponent implements OnInit {
   isScreenPinned:boolean = true;
 
   constructor(private router: Router, private meetingSessionService: MeetingSessionService) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    this.meetingSessionService.meetingSession.audioVideo.addObserver(this.observer);
+  }
 
   observer = {
     videoTileDidUpdate: (tileState: any) => {
