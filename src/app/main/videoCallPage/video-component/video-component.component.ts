@@ -37,8 +37,6 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
 
   observer = {
     videoTileDidUpdate: (tileState: any) => {
-      console.log('videoTileDidUpdate');
-      console.log(tileState);
       if (!tileState.boundAttendeeId) {
         return;
       }
@@ -48,7 +46,10 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
       let checkElement = document.getElementById(
         'videoElement_' + tileState.boundAttendeeId
       );
+      console.log(tileState);
+      console.log(checkElement);
       if (!checkElement) {
+        console.log('creating tile element');
         let element = document.createElement('div');
         element.className = 'grid_video_card';
         let video = document.createElement('video');
@@ -63,6 +64,7 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
         document.getElementById('grid-video-section')?.appendChild(element);
         console.log(element);
       } else {
+        console.log('binding with existing element');
         this.meetingSessionService.meetingSession.audioVideo.bindVideoElement(
           tileState.tileId,
           document.getElementById(
@@ -80,12 +82,12 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
       //     key = item;
       //   }
       // });
-  
+
 
       // document.getElementById('divVid_' + key)?.remove();
-      
+
       // delete this.tileStorage[key];
-     
+
     },
     audioVideoDidStop: (sessionStatus: any) => {
       // See the "Stopping a session" section for details.
@@ -119,6 +121,7 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
     this.meetingSessionService.newParticipant.subscribe((data: any) => {
       let checkElement = document.getElementById('divVid_' + data.id);
       if (!checkElement && data.present) {
+        console.log('creating empty element');
         let element = document.createElement('div');
         element.className = 'grid_video_card';
         let video = document.createElement('video');
@@ -128,7 +131,7 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
         element.appendChild(video);
         document.getElementById('grid-video-section')?.appendChild(element);
         console.log(element);
-      }else{
+      }else if(!data.present){
         document.getElementById('divVid_' + data.id)?.remove();
       }
     });

@@ -18,22 +18,16 @@ export class VideoCallComponent implements OnInit {
       (presentAttendeeId: string, present: boolean, externalUserId: string) => {
         if (present) {
           this.participants[presentAttendeeId] = externalUserId.split('#')[1];
-
-          //this.participants[presentAttendeeId] = externalUserId
         } else {
           delete this.participants[presentAttendeeId];
         }
-        console.log(presentAttendeeId);
-        console.log(present);
-        console.log(externalUserId);
 
-     
-          this.meetingSessionService.newParticipant.next({
-            id: presentAttendeeId,
-            username: externalUserId,
-            present
-          });
-       
+        this.meetingSessionService.newParticipant.next({
+          id: presentAttendeeId,
+          username: externalUserId,
+          present
+        });
+
         this.meetingSessionService.participants.next(this.participants);
       }
     );
