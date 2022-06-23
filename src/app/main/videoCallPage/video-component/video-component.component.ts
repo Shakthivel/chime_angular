@@ -1,98 +1,95 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { AudioRecordingService } from 'src/app/core/services/audio-recording.service';
-import { VideoRecordingService } from 'src/app/core/services/video-recording.service';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { MeetingSessionService } from '../../../core/services/meeting-session/meeting-session.service';
+import { DefaultModality, DefaultVideoTile } from 'amazon-chime-sdk-js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-video-component',
   templateUrl: './video-component.component.html',
-  styleUrls: ['./video-component.component.scss']
+  styleUrls: ['./video-component.component.scss'],
 })
-export class VideoComponentComponent implements OnInit {
-
-
+export class VideoComponentComponent implements OnInit, OnChanges {
   @ViewChild('videoElement') videoElement: any;
-  isCamOff:boolean = true;  
-  video!: any;
-  videoDisplay = 'none';
-  videoRecordedTime!: any;
-  videoBlobUrl!: any;
-  videoBlob!: any;
-  videoName!: any;
-  videoStream!: MediaStream;
-  videoConf = { video: { facingMode:"user", width: 540 }, audio: true}
+  @ViewChild('audioElement') audioElement: any;
+  videoElements:HTMLVideoElement[] = [];
 
-  speakerOff:boolean = false; 
+  isCamOff:boolean = true;
+  speakerOff:boolean = false;
   micOff:boolean = true;
   shareOff:boolean = true;
+  index = 0;
+  @Input() participants: any;
 
   isScreenPinned:boolean = true;
 
-  
-  constructor(
-    private ref: ChangeDetectorRef,
-    private audioRecordingService: AudioRecordingService,
-    private videoRecordingService: VideoRecordingService,
-    private sanitizer: DomSanitizer
-  ) {
-
-    this.videoRecordingService.recordingFailed().subscribe(() => {
-      this.isCamOff = false;
-      this.ref.detectChanges();
-    });
-
-    this.videoRecordingService.getRecordedTime().subscribe((time) => {
-      this.videoRecordedTime = time;
-      this.ref.detectChanges();
-    });
-
-    this.videoRecordingService.getStream().subscribe((stream) => {
-      this.videoStream = stream;
-      this.ref.detectChanges();
-    });
-
-    this.videoRecordingService.getRecordedBlob().subscribe((data) => {
-      this.videoBlob = data.blob;
-      this.videoName = data.title;
-      this.videoBlobUrl = this.sanitizer.bypassSecurityTrustUrl(data.url);
-      this.ref.detectChanges();
-    });
+  constructor(private router: Router, private meetingSessionService: MeetingSessionService) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    this.meetingSessionService.meetingSession.audioVideo.addObserver(this.observer);
   }
+
+  observer = {
+    videoTileDidUpdate: (tileState: any) => {
+      console.log('videoTileDidUpdate');
+      console.log(tileState);
+      if (!tileState.boundAttendeeId) {
+        return;
+      }
+      this.meetingSessionService.meetingSession.audioVideo.bindVideoElement(tileState.tileId,document.getElementById("videoElement_"+tileState.boundAttendeeId) as HTMLVideoElement);
+    },
+    contentShareDidStart: () => {
+      console.log('Screen share started');
+    },
+    contentShareDidStop: () => {
+      console.log('Content share stopped');
+    },
+  };
 
   ngOnInit(): void {
+    this.meetingSessionService.meetingSession.audioVideo.addObserver(this.observer);
   }
 
-  changeSpeakerStatus(){this.speakerOff = ! this.speakerOff;}
-  changeMicStatus(){this.micOff = ! this.micOff;}
-  changeScreenShareStatus(){this.shareOff = !this.shareOff;}
-  changePinStatus(){
+
+  changeSpeakerStatus() {
+    this.speakerOff = !this.speakerOff;
+  }
+  changeMicStatus() {
+    this.micOff = !this.micOff;
+  }
+
+  async changeScreenShareStatus() {
+    this.shareOff = !this.shareOff;
+    if (!this.shareOff) {
+      const contentShareStream =
+        await this.meetingSessionService.meetingSession.audioVideo.startContentShareFromScreenCapture();
+        DefaultVideoTile.connectVideoStreamToVideoElement(
+          contentShareStream,
+          this.videoElement.nativeElement,
+          false
+        );
+
+    } else {
+      await this.meetingSessionService.meetingSession.audioVideo.stopContentShare();
+    }
+
+  }
+  changePinStatus() {
     this.isScreenPinned = !this.isScreenPinned;
   }
-
+  //
   startVideoRecording() {
-    console.log("TEST")
-    this.isCamOff = false;
-    console.log(this.isCamOff)
-    this.video = this.videoElement.nativeElement;
-    this.video.controls = false;
-    this.videoDisplay = 'block';
-    this.videoRecordingService.startRecording(this.videoConf)
-    .then(stream => {
-        this.video.srcObject = stream;
-        this.video.play();
-    })
-    .catch(function (err) {
-        console.log(err.name + ": " + err.message);
+    this.isCamOff=false;
+    this.meetingSessionService.startVideoInput().then(()=>console.log('video input started')).then(()=>{
+      this.meetingSessionService.meetingSession.audioVideo.startLocalVideoTile();
     });
-    
   }
-
+  //
   stopVideoRecording() {
-      this.isCamOff = true;
-      this.videoRecordingService.stopRecording();
-      this.videoRecordingService.abortRecording();
-      this.video.srcObject = this.videoBlobUrl;
-      this.videoDisplay = 'none';
+    this.isCamOff = true;
+    this.meetingSessionService.stopVideoInput();
+    this.meetingSessionService.meetingSession.audioVideo.stopLocalVideoTile();
   }
 
+  leaveMeeting() {
+    this.router.navigate(['/leave']);
+  }
 }

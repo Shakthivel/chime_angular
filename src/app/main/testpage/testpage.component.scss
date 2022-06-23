@@ -16,7 +16,19 @@
     align-items: center;
     flex-wrap: wrap;
     width: 90%;
-    height: 450px;
+    height: 400px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color: #3A3B3C;
+}
+
+.test-profile-video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 90%;
+    height: 400px;
     margin-top: 5%;
     margin-bottom: 5%;
     background-color: #3A3B3C;
@@ -68,3 +80,19 @@
     color: red;
     font-size: 15px;
 }
+
+video {
+    width: 100%;
+    height: auto;
+  }
+  .flex-container {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    background-color: #3A3B3C;
+    max-width: 100%;
+  }
+  .flex-item {
+    max-width: 100%;
+    flex-basis: 50%;
+  }
