@@ -42,10 +42,10 @@
 
        <div class="left-speaker" (click)="changeSpeakerStatus()">
            <div *ngIf="!speakerOff" class="icon-img button" >
-               <img  src="assets/icons/speaker.png"/>
+               <img  src=""/>
            </div>
            <div *ngIf="speakerOff" class="icon-img button disabled-icon">
-               <img  src="assets/icons/speaker_off.png"/>
+               <img  src=""/>
            </div>
        </div>
 
@@ -62,17 +62,17 @@
            <div *ngIf="isCamOff" class="icon-img button disabled-icon" (click)="startVideoRecording()">
                <img src="assets/icons/camera_off.png"/>
            </div>
-           <div *ngIf="shareOff" class="icon-img button" (click)="changeScreenShareStatus()">
+           <div *ngIf="!shareOff" class="icon-img button" (click)="changeScreenShareStatus()">
                <img src="assets/icons/share_screen_off.png"/>
            </div>
-           <div *ngIf="!shareOff" class="icon-img button disabled-icon" (click)="changeScreenShareStatus()">
+           <div *ngIf="shareOff" class="icon-img button disabled-icon" (click)="changeScreenShareStatus()">
                <img src="assets/icons/share_screen_on.png"/>
            </div>
            <div class="icon-img button" (click)="changePinStatus()">
-               <img src="assets/icons/grid.png"/>
+               <img src=""/>
            </div>
            <div class="icon-img round-icon button">
-               <img src="assets/icons/options.png"/>
+               <img src=""/>
            </div>
        </div>
 
