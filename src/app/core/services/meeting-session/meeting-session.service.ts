@@ -7,7 +7,8 @@ import {
   MeetingSessionConfiguration,
   VideoSource,
 } from 'amazon-chime-sdk-js';
-import { Subject } from 'rxjs';
+import {Observable, Subject} from 'rxjs';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,7 @@ export class MeetingSessionService {
   attendee: any;
   configuration: any;
   meetingSession: any;
+  hostId: string = '';
 
   //Devices
   audioInputDevices: any;
@@ -36,7 +38,9 @@ export class MeetingSessionService {
   participantCount = new Subject<number>();
   participants = new Subject<any>();
 
-  constructor() {}
+  baseURL: string = 'http://localhost:3000/';
+
+  constructor(private http: HttpClient) {}
 
   setup(meeting: any, attendee: any): void {
     this.logger = new ConsoleLogger('MyLogger', LogLevel.OFF);
@@ -111,4 +115,14 @@ export class MeetingSessionService {
       }
     );
   }
+
+  endMeeting(): Observable<any> | false {
+    let token = localStorage.getItem('meet-token');
+    if (token) {
+      let headers = new HttpHeaders().set('token', token);
+      return this.http.post(`${this.baseURL}end?meet=${this.meeting.ExternalMeetingId}`, {}, {'headers': headers});
+    }
+    return false;
+  }
+
 }

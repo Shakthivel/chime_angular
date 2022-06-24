@@ -115,7 +115,12 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
     },
   };
 
+  isHost(): boolean {
+    return this.meetingSessionService.hostId === this.meetingSessionService['attendee']['AttendeeId'];
+  }
+
   ngOnInit(): void {
+    this.url = 'http://localhost:4200/?meetId='+this.meetingSessionService.meeting.ExternalMeetingId;
     this.meetingSessionService.meetingSession.audioVideo.addObserver(
       this.observer
     );
@@ -203,6 +208,21 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
   leaveMeeting() {
     this.meetingSessionService.meetingSession.audioVideo.stop();
     this.router.navigate(['/leave']);
+  }
+
+  endMeeting() {
+    let endMeet = this.meetingSessionService.endMeeting();
+    if(endMeet) {
+      endMeet.subscribe(
+        () => {
+          this.meetingSessionService.meetingSession.audioVideo.stop();
+          document.getElementById('leaveModal')
+          this.router.navigate(['/leave']);
+        }, () => {
+          console.log('invalid access');
+        }
+      );
+    }
   }
 
   getUrl() {

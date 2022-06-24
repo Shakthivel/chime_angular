@@ -13,6 +13,6 @@ export class PostMeetingComponent implements OnInit {
   }
 
   joinMeeting() {
-    this.router.navigate(['/join']);
+    this.router.navigate(['']);
   }
 }

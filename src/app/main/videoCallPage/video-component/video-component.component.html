@@ -1,5 +1,5 @@
 <div class="column-container full-height">
-  
+
   <!-- Leave Modal -->
   <div class="modal fade" id="leaveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -14,13 +14,13 @@
               <p class="content">End this video call for everyone?</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="modal-btn">Just leave the call</button>
-            <button type="button" class="modal-btn">End the call for everyone</button>
+            <button type="button" class="modal-btn" (click)="leaveMeeting()" data-dismiss="modal">Just leave the call</button>
+            <button type="button" class="modal-btn" (click)="endMeeting()" *ngIf="isHost()" data-dismiss="modal">End the call for everyone</button>
           </div>
       </div>
     </div>
   </div>
-  
+
    <div id="meetingHeading" class="row-container">
            <div class="back-button-section">
                <img src="assets/icons/back-arrow.png" alt="">
@@ -30,7 +30,7 @@
            </div>
            <div class="invite-section row-container button" cdkCopyToClipboard="{{url}}">
                <img src="assets/icons/add.png" alt="">
-               <span>Invite people</span>
+               <span>Copy Invite Link</span>
            </div>
    </div>
    <div class="video-section">

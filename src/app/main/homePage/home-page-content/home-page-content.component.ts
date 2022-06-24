@@ -45,6 +45,8 @@ export class HomePageContentComponent implements OnInit {
           (data: any) => {
             let meeting: any = data['JoinInfo']['Meeting']['Meeting'];
             let attendee: any = data['JoinInfo']['Attendee']['Attendee'];
+            localStorage.setItem('meet-token', data['JoinInfo']['token']);
+            this.meetingSessionService.hostId = data['JoinInfo']['byAttendeeId'];
             this.joinMeetingService.setMeeting(meeting);
             this.joinMeetingService.setAttendee(attendee);
             this.meetingSessionService.setup(meeting, attendee);
@@ -56,10 +58,15 @@ export class HomePageContentComponent implements OnInit {
           (data: any) => {
             let meeting: any = data['JoinInfo']['Meeting']['Meeting'];
             let attendee: any = data['JoinInfo']['Attendee']['Attendee'];
+            localStorage.setItem('meet-token', data['JoinInfo']['token']);
+            this.meetingSessionService.hostId = data['JoinInfo']['byAttendeeId'];
             this.joinMeetingService.setMeeting(meeting);
             this.joinMeetingService.setAttendee(attendee);
             this.meetingSessionService.setup(meeting, attendee);
             this.router.navigate(['/meet']);
+          },
+          () => {
+            console.log('meet does not exist');
           }
         );
       }
