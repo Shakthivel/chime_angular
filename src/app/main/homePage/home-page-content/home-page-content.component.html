@@ -3,17 +3,18 @@
     <nav>Logo</nav>
 
     <main>
-
         <div class="home-main-left">
-            <h1>Secured Remote meetings for you anytime.</h1>
-            <button (click)="redirectToJoinMeeting()"> <i class="fa-solid fa-square-plus"></i> Join Meeting </button>
+          <h1>Secured Remote meetings for you anytime.</h1>
+          <div class="input-box"><input class="input-field" type="text" placeholder="Username" #username></div>
+          <br>
+          <button (click)="createOrJoinMeeting(username.value)"> <i class="fa-solid fa-square-plus"></i> {{getButton()}} </button>
         </div>
 
-        
-        
+
+
         <div class="home-main-right">
-            
-          
+
+
           <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item main-item-container active">
@@ -29,7 +30,7 @@
                   <img src="assets/c-2.svg" class="mb-2" alt="...">
                   <h2>See everyone together</h2>
                   <p>To see more people at the same time, go to Change layout in the More options menu</p>
-                  
+
                 </div>
               </div>
               <div class="carousel-item main-item-container">
@@ -40,7 +41,7 @@
                     <h2>Your meeting is safe</h2>
                     <p>No one can join your meeting unless they have your meeting ID</p>
                   </div>
-                    
+
                 </div>
               </div>
             </div>

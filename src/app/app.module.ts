@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestpageComponent } from './main/testpage/testpage.component';
 import { CreateMeetingComponent } from './main/createMeetingPage/create-meeting/create-meeting.component';
 import { PostMeetingComponent } from './main/post-meeting/post-meeting.component';
+import {HomePageContentComponent} from "./main/homePage/home-page-content/home-page-content.component";
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { PostMeetingComponent } from './main/post-meeting/post-meeting.component
     ParticipantsComponentComponent,
     VideoComponentComponent,
     TestpageComponent,
-    PostMeetingComponent
+    PostMeetingComponent,
+    HomePageContentComponent
   ],
   imports: [
     AppRoutingModule,
