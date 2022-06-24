@@ -14,7 +14,7 @@ import { TestpageComponent } from './main/testpage/testpage.component';
 import { CreateMeetingComponent } from './main/createMeetingPage/create-meeting/create-meeting.component';
 import { PostMeetingComponent } from './main/post-meeting/post-meeting.component';
 import {HomePageContentComponent} from "./main/homePage/home-page-content/home-page-content.component";
-
+import { ClipboardModule } from "@angular/cdk/clipboard";
 
 @NgModule({
   declarations: [
@@ -34,6 +34,7 @@ import {HomePageContentComponent} from "./main/homePage/home-page-content/home-p
     HttpClientModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ClipboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

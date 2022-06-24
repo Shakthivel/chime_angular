@@ -8,6 +8,7 @@
         .invite-section
         {
             margin: 10px;
+            cursor: pointer;
         }
         .back-button-section,.invite-section{
             border-radius:5px;
@@ -141,3 +142,21 @@
         border-bottom:2px solid $color-grey-input-border;
     }
 
+.modal-btn {
+    background-color: transparent;
+    color: #378AD2;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+.title {
+    font-size: large;
+}
+
+.modal-btn-close {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
