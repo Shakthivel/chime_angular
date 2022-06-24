@@ -4,13 +4,14 @@
   <div class="modal fade" id="leaveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
-        <div class="modal-footer">
-            <button type="modal-btn-close" class="close" data-dismiss="modal" aria-label="Close">
+        <div class="modal-header modal-custom-header">
+            <h3 class="title">Exit</h3>
+            <button type="modal-btn-close" class="close close-btn" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-              <p class="title">End this video call for everyone?</p>
+              <p class="content">End this video call for everyone?</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="modal-btn">Just leave the call</button>
@@ -27,7 +28,7 @@
            <div class="title-section">
                <span>Meeting Title</span>
            </div>
-           <div class="invite-section row-container" cdkCopyToClipboard="{{url}}">
+           <div class="invite-section row-container button" cdkCopyToClipboard="{{url}}">
                <img src="assets/icons/add.png" alt="">
                <span>Invite people</span>
            </div>
@@ -76,7 +77,7 @@
        </div>
 
        <div class="right-leave">
-           <div class="icon-img button" (click)="leaveMeeting()" data-toggle="modal" data-target="#leaveModal">
+           <div class="icon-img button" data-toggle="modal" data-target="#leaveModal">
                <img src="assets/icons/leave.png"/>
            </div>
        </div>

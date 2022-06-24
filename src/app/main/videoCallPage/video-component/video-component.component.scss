@@ -151,12 +151,30 @@
 }
 
 
-.title {
+.content {
     font-size: large;
 }
 
-.modal-btn-close {
-    position: fixed;
+.title {
+    color: red;
+    font-size:x-large;
+    font-weight: 600;
+}
+
+.modal-custom-header {
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    margin-bottom: -3%;
+}
+
+.close-btn {
+    position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
+    padding: 4%;
+}
+
+.button:active {
+  transform: translateY(4px);
 }
