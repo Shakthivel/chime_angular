@@ -40,14 +40,10 @@ export class TestpageComponent implements OnInit {
 
   ngOnInit() {
     this.meetingSessionService.getAudioInputDevices().then(data=> {
-      console.log(data);
-      
       this.meetingSessionService.audioInputDevices = data;
       this.meetingSessionService.setAudioInput(0);
     });
     this.meetingSessionService.getAudioOutputDevices().then(data=> {
-      console.log(data);
-      
       this.meetingSessionService.audioOutputDevices = data;
       this.meetingSessionService.setAudioOutput(0);
     });
@@ -71,7 +67,7 @@ export class TestpageComponent implements OnInit {
     audioVideoDidStart: (tileState: any) => {
       console.log('audioVideoDidStart()')
       console.log(tileState)
-      this.meetingSessionService.meetingSession.audioVideo.startLocalVideoTile();
+      this.meetingSessionService.meetingSession.audioVideo.startVideoPreviewForVideoInput();
     }
   };
 
@@ -87,8 +83,8 @@ export class TestpageComponent implements OnInit {
   stopVideoRecording(){
     this.isVideoRecording = false;
     this.videoDisplay = 'none';
+    this.meetingSessionService.meetingSession.stopVideoPreviewForVideoInput();
     this.meetingSessionService.meetingSession.audioVideo.stop();
-    this.meetingSessionService.stopVideoInput();
   }
 
   startAudioRecording() {

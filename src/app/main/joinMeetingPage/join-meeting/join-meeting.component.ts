@@ -19,9 +19,9 @@ export class JoinMeetingComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  joinMeeting( meetingId: string, emailId: string, username: string): void {
+  joinMeeting( meetingId: string, username: string): void {
     console.log('joinMeeting()');
-    this.joinMeetingService.joinMeeting(meetingId, emailId, username ).subscribe(
+    this.joinMeetingService.joinMeeting(meetingId, username ).subscribe(
       (data: any) => {
         let meeting: any = data['JoinInfo']['Meeting']['Meeting'];
         let attendee: any = data['JoinInfo']['Attendee']['Attendee'];

@@ -13,6 +13,18 @@ export class VideoCallComponent implements OnInit {
   constructor(private meetingSessionService: MeetingSessionService) {}
 
   ngOnInit(): void {
+    this.meetingSessionService.getAudioInputDevices().then(data=> {
+      this.meetingSessionService.audioInputDevices = data;
+      this.meetingSessionService.setAudioInput(0);
+    });
+    this.meetingSessionService.getAudioOutputDevices().then(data=> {
+      this.meetingSessionService.audioOutputDevices = data;
+      this.meetingSessionService.setAudioOutput(0);
+    });
+    this.meetingSessionService.getVideoInputDevices().then(data=> {
+      this.meetingSessionService.videoInputDevices = data;
+      this.meetingSessionService.setVideoInput(0);
+    });
     this.meetingSessionService.meetingSession.audioVideo.start();
     this.meetingSessionService.meetingSession.audioVideo.realtimeSubscribeToAttendeeIdPresence(
       (presentAttendeeId: string, present: boolean, externalUserId: string) => {
