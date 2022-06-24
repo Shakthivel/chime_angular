@@ -9,7 +9,7 @@ import { KeyValue } from '@angular/common';
 })
 export class ParticipantsComponentComponent implements OnInit {
 
-  @Input() participants: any;
+  @Input() participants: {key: string, value: string} | any;
 
   constructor(private meetingSessionService: MeetingSessionService) {}
 

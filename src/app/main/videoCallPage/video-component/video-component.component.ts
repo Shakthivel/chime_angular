@@ -1,4 +1,3 @@
-
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -12,14 +11,13 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { MeetingSessionService } from '../../../core/services/meeting-session/meeting-session.service';
-import {Router} from "@angular/router";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-video-component',
   templateUrl: './video-component.component.html',
   styleUrls: ['./video-component.component.scss'],
 })
-
 export class VideoComponentComponent implements OnInit, AfterViewInit {
   @ViewChild('audioElement') audioElement: any;
   @ViewChild('aEl') aEl: any;
@@ -37,7 +35,10 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
   isScreenPinned: boolean = true;
   presenterId: any;
 
-  constructor(private router: Router, private meetingSessionService: MeetingSessionService) {}
+  constructor(
+    private router: Router,
+    private meetingSessionService: MeetingSessionService
+  ) {}
 
   observer = {
     videoTileDidUpdate: (tileState: any) => {
@@ -87,11 +88,9 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
       //   }
       // });
 
-
       // document.getElementById('divVid_' + key)?.remove();
 
       // delete this.tileStorage[key];
-
     },
     audioVideoDidStop: (sessionStatus: any) => {
       // See the "Stopping a session" section for details.
@@ -116,11 +115,16 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
   };
 
   isHost(): boolean {
-    return this.meetingSessionService.hostId === this.meetingSessionService['attendee']['AttendeeId'];
+    return (
+      this.meetingSessionService.hostId ===
+      this.meetingSessionService['attendee']['AttendeeId']
+    );
   }
 
   ngOnInit(): void {
-    this.url = 'http://localhost:4200/?meetId='+this.meetingSessionService.meeting.ExternalMeetingId;
+    this.url =
+      'http://localhost:4200/?meetId=' +
+      this.meetingSessionService.meeting.ExternalMeetingId;
     this.meetingSessionService.meetingSession.audioVideo.addObserver(
       this.observer
     );
@@ -140,7 +144,7 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
         element.appendChild(video);
         document.getElementById('grid-video-section')?.appendChild(element);
         console.log(element);
-      }else if(!data.present){
+      } else if (!data.present) {
         document.getElementById('divVid_' + data.id)?.remove();
       }
     });
@@ -211,17 +215,19 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
   }
 
   endMeeting() {
+    this.meetingSessionService.meetingSession.audioVideo.stop();
     let endMeet = this.meetingSessionService.endMeeting();
-    if(endMeet) {
-      endMeet.subscribe(
-        () => {
-          this.meetingSessionService.meetingSession.audioVideo.stop();
-          document.getElementById('leaveModal')
+    if (endMeet) {
+      endMeet.subscribe({
+        next: () => {
+
           this.router.navigate(['/leave']);
-        }, () => {
-          console.log('invalid access');
+        },
+        error: ()=>{
+        
+          this.router.navigate(['/leave']);
         }
-      );
+      });
     }
   }
 
