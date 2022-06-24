@@ -13,8 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestpageComponent } from './main/testpage/testpage.component';
 import { CreateMeetingComponent } from './main/createMeetingPage/create-meeting/create-meeting.component';
 import { PostMeetingComponent } from './main/post-meeting/post-meeting.component';
-
-
+import { ClipboardModule } from "@angular/cdk/clipboard";
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +31,7 @@ import { PostMeetingComponent } from './main/post-meeting/post-meeting.component
     HttpClientModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ClipboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

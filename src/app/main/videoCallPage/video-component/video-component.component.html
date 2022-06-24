@@ -1,4 +1,25 @@
 <div class="column-container full-height">
+  
+  <!-- Leave Modal -->
+  <div class="modal fade" id="leaveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-footer">
+            <button type="modal-btn-close" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <p class="title">End this video call for everyone?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="modal-btn">Just leave the call</button>
+            <button type="button" class="modal-btn">End the call for everyone</button>
+          </div>
+      </div>
+    </div>
+  </div>
+  
    <div id="meetingHeading" class="row-container">
            <div class="back-button-section">
                <img src="assets/icons/back-arrow.png" alt="">
@@ -6,30 +27,15 @@
            <div class="title-section">
                <span>Meeting Title</span>
            </div>
-           <div class="invite-section row-container">
+           <div class="invite-section row-container" cdkCopyToClipboard="{{url}}">
                <img src="assets/icons/add.png" alt="">
                <span>Invite people</span>
            </div>
    </div>
    <div class="video-section">
-       <!-- <div *ngIf="!isScreenPinned" class="grid-video-section"> -->
         <div id="grid-video-section" class="grid-video-section">
             <audio #aEl></audio>
         </div>
-       <!-- <div *ngIf="isScreenPinned" class="pin-video-section ">
-           <div class="pinned-video" >
-            <video #videoElement [height]="450">
-            </video>
-            <audio #audioElement></audio>
-           </div>
-           <div class="other-participants" >
-               <div class="other-video" *ngFor="let _ of [].constructor(10);let i = index">
-                <video class="videoElement" id="{{'videoElement_'+(i+1)}}">
-                </video>
-                <audio #audioElement></audio>
-               </div>
-           </div>
-       </div> -->
    </div>
    <div id="meetingFooter" class="row-container">
 
@@ -70,7 +76,7 @@
        </div>
 
        <div class="right-leave">
-           <div class="icon-img button" (click)="leaveMeeting()">
+           <div class="icon-img button" (click)="leaveMeeting()" data-toggle="modal" data-target="#leaveModal">
                <img src="assets/icons/leave.png"/>
            </div>
        </div>

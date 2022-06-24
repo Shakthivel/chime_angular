@@ -30,6 +30,7 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
   micOff: boolean = true;
   shareOff: boolean = true;
   index = 0;
+  url: string = 'meetingurl.com';
 
   tileStorage: any = {};
 
@@ -202,5 +203,9 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
   leaveMeeting() {
     this.meetingSessionService.meetingSession.audioVideo.stop();
     this.router.navigate(['/leave']);
+  }
+
+  getUrl() {
+    return this.url;
   }
 }
