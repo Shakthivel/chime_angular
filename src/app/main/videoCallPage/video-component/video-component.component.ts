@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { MeetingSessionService } from '../../../core/services/meeting-session/meeting-session.service';
 import { Router } from '@angular/router';
+import {MeetingSessionStatusCode} from "amazon-chime-sdk-js";
 
 @Component({
   selector: 'app-video-component',
@@ -93,11 +94,11 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
       // delete this.tileStorage[key];
     },
     audioVideoDidStop: (sessionStatus: any) => {
-      // See the "Stopping a session" section for details.
-      console.log(
-        'Stopped with a session status code: ',
-        sessionStatus.statusCode()
-      );
+      const sessionStatusCode = sessionStatus.statusCode();
+      if (sessionStatusCode === MeetingSessionStatusCode.MeetingEnded) {
+        this.meetingSessionService.meetingSession.audioVideo.stop();
+        this.router.navigate(['/leave']);
+      }
     },
     contentShareDidStart: () => {
       console.log('Screen share started');
@@ -224,7 +225,7 @@ export class VideoComponentComponent implements OnInit, AfterViewInit {
           this.router.navigate(['/leave']);
         },
         error: ()=>{
-        
+
           this.router.navigate(['/leave']);
         }
       });
